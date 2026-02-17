@@ -1,0 +1,36 @@
+{
+  "images_root": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/evaluation_web/images",
+  "matrix_root": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/original_data_RGB_images",
+  "out_root": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/evaluation_web/generated_hes",
+  "device": "cuda",
+  "img_size": 256,
+  "tile_patch_size": 256,
+  "tile_overlap": 0,
+  "models": [
+    "cfm",
+    "unet"
+  ],
+  "organs": {
+    "breast": {
+      "n_images": 24,
+      "matrix_file": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/original_data_RGB_images/Breast/Breast_mean_stain_matrix.txt"
+    },
+    "colon": {
+      "n_images": 14,
+      "matrix_file": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/original_data_RGB_images/colon/Colon_mean_stain_matrix.txt"
+    },
+    "lung": {
+      "n_images": 16,
+      "matrix_file": "/home/salim/Desktop/PFE/implimentation/PNP_FM/wssb_dataset/original_data_RGB_images/Lung/Lung_mean_stain_matrix.txt"
+    }
+  },
+  "counts": {
+    "total_inputs": 54,
+    "cfm_generated": 54,
+    "unet_generated": 54,
+    "total_tiles": 696,
+    "skipped_existing": 0,
+    "errors": 0
+  },
+  "errors": []
+}
