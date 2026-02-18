@@ -233,6 +233,15 @@
       font-size: 12px;
       color: var(--muted);
     }
+    .organ-nav {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .organ-nav-right {
+      justify-content: flex-end;
+    }
     .back-to-top {
       position: fixed;
       right: 18px;
@@ -1153,6 +1162,9 @@
             </div>
           </div>
         </article>
+      <div class="organ-nav organ-nav-right organ-nav-end">
+        <button type="button" class="organ-jump" data-target="organ-colon">Next organ: Colon</button>
+      </div>
     </section>
 
     <section class="organ-section" id="organ-colon">
@@ -1605,6 +1617,10 @@
             </div>
           </div>
         </article>
+      <div class="organ-nav organ-nav-end">
+        <button type="button" class="organ-jump" data-target="organ-breast">Back to Breast</button>
+        <button type="button" class="organ-jump" data-target="organ-lung">Next organ: Lung</button>
+      </div>
     </section>
 
     <section class="organ-section" id="organ-lung">
@@ -2335,6 +2351,14 @@
         tabsHost.appendChild(btn);
       }
 
+      const jumpButtons = Array.from(document.querySelectorAll(".organ-jump"));
+      for (const btn of jumpButtons) {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.target;
+          if (target) activate(target);
+        });
+      }
+
       activate(sections[0].id);
     }
 
@@ -2367,9 +2391,9 @@
           [rows[i], rows[j]] = [rows[j], rows[i]];
         }
 
-        const finalMsg = sec.querySelector(".organ-final-msg");
+        const endAnchor = sec.querySelector(".organ-nav-end") || sec.querySelector(".organ-final-msg");
         for (const row of rows) {
-          if (finalMsg) sec.insertBefore(row, finalMsg);
+          if (endAnchor) sec.insertBefore(row, endAnchor);
           else sec.appendChild(row);
         }
 
