@@ -284,14 +284,18 @@
         <img src="images/logo_hopital.png" alt="Hospital logo">
       </div>
       <h1>Subjective HES Image Evaluation</h1>
-      <p>Please evaluate generated HES images from HE inputs.</p>
-      <p>For each patch, select quality for HES model 1 and HES model 2.</p>
+      <p>This study evaluates a public dataset spanning three organs. These images were not seen during training, so the goal is to assess the generalization of our models.</p>
+      <p>Please evaluate the generated HES images given the corresponding HE inputs. For each patch, select the quality for HES model 1 and HES model 2.</p>
+      <p class="muted">Focus on the quality of the saffron staining added relative to the HE input image.</p>
       <p>
         Quality levels:
         <strong class="quality-good">Good quality</strong>,
         <strong class="quality-intermediate">Intermediate quality</strong>,
         <strong class="quality-bad">Bad quality</strong>.
       </p>
+      <p class="muted"><strong class="quality-bad">Bad quality</strong>: absence of saffron or overly strong saffron presence (relative to the HE input) is incorrect.</p>
+      <p class="muted"><strong class="quality-intermediate">Intermediate quality</strong>: saffron is present in some correct regions but is missing in other expected regions, or it appears in regions that normally should not contain saffron.</p>
+      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is accurately added in the regions where it should appear, without being added to regions that should not contain saffron.</p>
       <p class="muted">Responses are auto-saved in your browser on this computer.</p>
       <div class="toolbar">
         <button id="btn-export-csv" type="button">Export CSV</button>
@@ -2334,12 +2338,32 @@
       activate(sections[0].id);
     }
 
+    function hashString(value) {
+      let hash = 5381;
+      for (let i = 0; i < value.length; i += 1) {
+        hash = ((hash << 5) + hash) + value.charCodeAt(i);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function makeRng(seedValue) {
+      let state = seedValue % 2147483647;
+      if (state <= 0) state += 2147483646;
+      return () => {
+        state = (state * 48271) % 2147483647;
+        return state / 2147483647;
+      };
+    }
+
     function randomizePatchDisplay() {
+      const seed = "fixed-seed-v2";
       const sections = Array.from(document.querySelectorAll(".organ-section"));
       for (const sec of sections) {
         const rows = Array.from(sec.querySelectorAll(".patch-row"));
+        const rng = makeRng(hashString(`${seed}:${sec.id}`));
         for (let i = rows.length - 1; i > 0; i -= 1) {
-          const j = Math.floor(Math.random() * (i + 1));
+          const j = Math.floor(rng() * (i + 1));
           [rows[i], rows[j]] = [rows[j], rows[i]];
         }
 
