@@ -302,9 +302,9 @@
         <strong class="quality-intermediate">Intermediate quality</strong>,
         <strong class="quality-bad">Bad quality</strong>.
       </p>
-      <p class="muted"><strong class="quality-bad">Bad quality</strong>: absence of saffron or overly strong saffron presence (relative to the HE input) is incorrect.</p>
-      <p class="muted"><strong class="quality-intermediate">Intermediate quality</strong>: saffron is present in some correct regions but is missing in other expected regions, or it appears in regions that normally should not contain saffron.</p>
-      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is accurately added in the regions where it should appear, without being added to regions that should not contain saffron.</p>
+      <p class="muted"><strong class="quality-bad">Bad quality</strong>: absence of saffron in the generated HES image, or saffron presence is not realistic.</p>
+      <p class="muted"><strong class="quality-intermediate">Intermediate quality</strong>: saffron is present, but it looks only slightly realistic.</p>
+      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is present and looks much more realistic.</p>
       <p class="muted">Responses are auto-saved in your browser on this computer.</p>
       <div class="toolbar">
         <button id="btn-export-csv" type="button">Export CSV</button>
@@ -2277,14 +2277,35 @@
       URL.revokeObjectURL(url);
     }
 
+    function getDisplayedRows() {
+      const rows = Array.from(document.querySelectorAll(".organ-section .patch-row"));
+      return rows.map((rowEl) => {
+        const rowId = rowEl.dataset.rowId || "";
+        const organ = (rowId.split("_")[0] || "").replace(/^\w/, (c) => c.toUpperCase());
+        const title = rowEl.querySelector(".patch-title");
+        const patchLabel = title ? title.textContent.trim() : "";
+        const patchNumber = Number((patchLabel.match(/\d+/) || [])[0] || 0);
+        const imgs = rowEl.querySelectorAll("img");
+        const heSrc = imgs[0]?.getAttribute("src") || "";
+        const hes1Src = imgs[1]?.getAttribute("src") || "";
+        const hes2Src = imgs[2]?.getAttribute("src") || "";
+        const hes1Select = rowEl.querySelector("select.quality-hes1");
+        const hes2Select = rowEl.querySelector("select.quality-hes2");
+        return {
+          organ,
+          patch: patchNumber,
+          row_id: rowId,
+          he_image: heSrc,
+          hes_model_1_image: hes1Src,
+          hes_model_2_image: hes2Src,
+          hes_model_1_quality: normalize(hes1Select?.value || ""),
+          hes_model_2_quality: normalize(hes2Select?.value || ""),
+        };
+      });
+    }
+
     function exportJson() {
-      const state = collectState();
-      const rows = ROWS.map((row) => ({
-        organ: row.organ,
-        patch: row.patch,
-        hes_model_1_quality: state[row.field_hes1] || "",
-        hes_model_2_quality: state[row.field_hes2] || "",
-      }));
+      const rows = getDisplayedRows();
       downloadBlob("evaluation_responses.json", JSON.stringify(rows, null, 2), "application/json");
     }
 
@@ -2297,15 +2318,27 @@
     }
 
     function exportCsv() {
-      const state = collectState();
-      const header = ["organ", "patch", "hes_model_1_quality", "hes_model_2_quality"];
+      const header = [
+        "organ",
+        "patch",
+        "row_id",
+        "he_image",
+        "hes_model_1_image",
+        "hes_model_2_image",
+        "hes_model_1_quality",
+        "hes_model_2_quality",
+      ];
       const lines = [header.join(",")];
-      for (const row of ROWS) {
+      for (const row of getDisplayedRows()) {
         const vals = [
           row.organ,
           row.patch,
-          state[row.field_hes1] || "",
-          state[row.field_hes2] || "",
+          row.row_id,
+          row.he_image,
+          row.hes_model_1_image,
+          row.hes_model_2_image,
+          row.hes_model_1_quality,
+          row.hes_model_2_quality,
         ];
         lines.push(vals.map(csvEscape).join(","));
       }
