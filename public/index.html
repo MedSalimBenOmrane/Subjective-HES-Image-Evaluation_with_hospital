@@ -1,320 +1,637 @@
 <!doctype html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Subjective HES Evaluation</title>
+
   <style>
+
     :root {
+
       --bg: #f4f1ea;
+
       --panel: #fffdf8;
+
       --line: #d4c7b0;
+
       --text: #1f1b16;
+
       --muted: #5f574b;
+
       --accent: #2f5e5a;
+
       --good: #1e8e3e;
+
       --intermediate: #d9822b;
+
       --bad: #c9332f;
+
     }
+
     * { box-sizing: border-box; }
+
     body {
+
       margin: 0;
+
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
       background: linear-gradient(180deg, #efe8db 0%, var(--bg) 40%, #f8f4ec 100%);
+
       color: var(--text);
+
       line-height: 1.35;
+
     }
+
     .container {
+
       max-width: 1180px;
+
       margin: 0 auto;
+
       padding: 20px 18px 48px;
+
     }
+
     .card {
+
       background: var(--panel);
+
       border: 1px solid var(--line);
+
       border-radius: 12px;
+
       padding: 14px;
+
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
     }
+
     .top-logos {
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       gap: 16px;
+
       margin-bottom: 8px;
+
     }
+
     .top-logos img {
+
       width: auto;
+
       max-width: 170px;
+
       height: 52px;
+
       object-fit: contain;
+
       border: 0;
+
       border-radius: 0;
+
       background: transparent;
+
     }
+
     h1 {
+
       margin: 0 0 8px;
+
       font-size: 28px;
+
     }
+
     p { margin: 6px 0; }
+
     .muted { color: var(--muted); }
+
     .toolbar {
+
       margin-top: 14px;
+
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 10px;
+
     }
+
     button {
+
       border: 1px solid var(--line);
+
       background: white;
+
       color: var(--text);
+
       padding: 8px 12px;
+
       border-radius: 8px;
+
       cursor: pointer;
+
       font-weight: 600;
+
     }
+
     button:hover { border-color: var(--accent); }
+
     .summary {
+
       width: 100%;
+
       border-collapse: collapse;
+
       margin-top: 14px;
+
       font-size: 14px;
+
     }
+
     .summary th, .summary td {
+
       border: 1px solid var(--line);
+
       padding: 8px;
+
       text-align: center;
+
     }
-    .quality-good { color: var(--good); font-weight: 700; }
+
+    .quality-good { color: #1b6ca8; font-weight: 700; }
+    .quality-very-good { color: #1e8e3e; font-weight: 700; }
     .quality-intermediate { color: var(--intermediate); font-weight: 700; }
+
     .quality-bad { color: var(--bad); font-weight: 700; }
+
     select.quality.value-good {
-      color: var(--good);
+      color: #1b6ca8;
+      border-color: #7fb3d5;
+      font-weight: 700;
+    }
+    select.quality.value-very-good {
+      color: #1e8e3e;
       border-color: #86c995;
       font-weight: 700;
     }
     select.quality.value-intermediate {
+
       color: var(--intermediate);
+
       border-color: #e3b277;
+
       font-weight: 700;
+
     }
+
     select.quality.value-bad {
+
       color: var(--bad);
+
       border-color: #e09a97;
+
       font-weight: 700;
+
     }
+
     .summary th:first-child, .summary td:first-child {
+
       text-align: left;
+
       width: 150px;
+
     }
+
     .model-summary {
+
       margin-top: 14px;
+
     }
+
     .model-summary h3 {
+
       margin: 0 0 6px;
+
       font-size: 22px;
+
     }
+
     .summary .progress-col {
+
       width: 160px;
+
       text-align: center;
+
       font-size: 13px;
+
       font-weight: 700;
+
     }
+
     .organ-tabs {
+
       margin-top: 16px;
+
       display: flex;
+
       align-items: flex-start;
+
       flex-wrap: wrap;
+
       gap: 16px;
+
       padding: 12px;
+
       background: #fff7ea;
+
       border: 1px solid var(--line);
+
       border-radius: 12px;
+
     }
+
     .organ-group {
+
       display: flex;
+
       flex-direction: column;
+
       align-items: flex-start;
+
       gap: 8px;
+
     }
+
     .organ-group-title {
+
       font-weight: 700;
+
       color: #4f4639;
+
       margin-right: 2px;
+
     }
+
     .organ-group-buttons {
+
       display: flex;
+
       gap: 10px;
+
       flex-wrap: wrap;
+
     }
+
     .organ-separator {
+
       width: 1px;
+
       height: 44px;
+
       background: var(--line);
+
       align-self: stretch;
+
     }
+
     .zoom-panel {
+
       margin-top: 12px;
+
       border: 1px solid var(--line);
+
       border-radius: 12px;
+
       background: #fff;
+
       overflow: hidden;
+
     }
+
     .zoom-grid {
+
       display: grid;
+
       grid-template-columns: repeat(2, minmax(0, 1fr));
+
       gap: 12px;
+
       margin-top: 12px;
+
     }
+
     @media (max-width: 900px) {
+
       .zoom-grid { grid-template-columns: 1fr; }
+
     }
+
     .zoom-toolbar {
+
       display: flex;
+
       gap: 8px;
+
       align-items: center;
+
       padding: 10px 12px;
+
       border-bottom: 1px solid var(--line);
+
       background: #fff7ea;
+
       font-size: 13px;
+
       color: var(--muted);
+
     }
+
     .zoom-toolbar .zoom-btn {
+
       padding: 6px 10px;
+
       border-radius: 8px;
+
       border: 1px solid var(--line);
+
       background: #fff;
+
       font-weight: 700;
+
       cursor: pointer;
+
     }
+
     .zoom-viewport {
+
       position: relative;
+
       height: 70vh;
+
       max-height: 720px;
+
       min-height: 420px;
+
       overflow: hidden;
+
       background: #f7f3ea;
+
       cursor: grab;
+
     }
+
     .zoom-viewport.grabbing {
+
       cursor: grabbing;
+
     }
+
     .zoom-image {
+
       position: absolute;
+
       top: 0;
+
       left: 0;
+
       transform-origin: 0 0;
+
       will-change: transform;
+
       user-select: none;
+
       -webkit-user-drag: none;
+
       max-width: none;
+
       max-height: none;
+
       border: 0;
+
       background: transparent;
+
       image-rendering: auto;
+
       image-rendering: -webkit-optimize-contrast;
+
     }
+
     .organ-tab {
+
       border: 2px solid #bda980;
+
       background: #fff;
+
       color: var(--text);
+
       padding: 12px 20px;
+
       border-radius: 999px;
+
       font-weight: 700;
+
       font-size: 16px;
+
       letter-spacing: 0.2px;
+
       cursor: pointer;
+
       transition: 120ms ease;
+
     }
+
     .organ-tab:hover {
+
       border-color: var(--accent);
+
       color: var(--accent);
+
       transform: translateY(-1px);
+
     }
+
     .organ-tab.active {
+
       background: var(--accent);
+
       color: #fff;
+
       border-color: var(--accent);
+
       box-shadow: 0 8px 18px rgba(47, 94, 90, 0.28);
+
     }
+
     .organ-help {
+
       margin: 8px 2px 2px;
+
       font-size: 14px;
+
       color: #4f4639;
+
       font-weight: 600;
+
     }
+
     .organ-final-msg {
+
       margin: 16px 2px 2px;
+
       padding: 10px 12px;
+
       border: 1px solid #c8daba;
+
       border-radius: 10px;
+
       background: #edf7e8;
+
       color: #234720;
+
       font-weight: 700;
+
     }
+
     .organ-section {
+
       margin-top: 22px;
+
       display: none;
+
     }
+
     .organ-section.active {
+
       display: block;
+
     }
+
     .organ-section h2 {
+
       margin: 0 0 10px;
+
       font-size: 22px;
+
       border-left: 6px solid var(--accent);
+
       padding-left: 10px;
+
     }
+
     .patch-row {
+
       margin: 12px 0;
+
       padding: 12px;
+
       border: 1px solid var(--line);
+
       border-radius: 10px;
+
       background: #fff;
+
     }
+
     .patch-title {
+
       font-weight: 700;
+
       margin-bottom: 8px;
+
       color: #2e2b24;
+
     }
+
     .grid {
+
       display: grid;
+
       grid-template-columns: repeat(3, minmax(0, 1fr));
+
       gap: 12px;
+
     }
+
     .grid-4 {
+
       grid-template-columns: repeat(4, minmax(0, 1fr));
+
     }
+
     .cell {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 6px;
+
     }
+
     .label {
+
       font-size: 13px;
+
       color: var(--muted);
+
       font-weight: 600;
+
     }
+
     img {
+
       width: 100%;
+
       max-height: 240px;
+
       object-fit: contain;
+
       border: 1px solid var(--line);
+
       border-radius: 8px;
+
       background: #faf8f3;
+
     }
+
     .select-label {
+
       font-size: 12px;
+
       color: #4b4439;
+
     }
+
     select {
+
       width: 100%;
+
       padding: 8px;
+
       border: 1px solid var(--line);
+
       border-radius: 8px;
+
       font-size: 14px;
+
       background: white;
+
     }
+
     .footer-note {
       margin-top: 18px;
       font-size: 12px;
@@ -330,1546 +647,3088 @@
       background: #fff;
     }
     .organ-nav {
+
       margin-top: 16px;
+
       display: flex;
+
       gap: 10px;
+
       justify-content: space-between;
+
     }
+
     .organ-nav-right {
+
       justify-content: flex-end;
+
     }
+
     .back-to-top {
+
       position: fixed;
+
       right: 18px;
+
       bottom: 18px;
+
       z-index: 999;
+
       border: 1px solid var(--accent);
+
       background: var(--accent);
+
       color: #fff;
+
       border-radius: 999px;
+
       padding: 10px 14px;
+
       font-weight: 700;
+
       cursor: pointer;
+
       box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+
       opacity: 0;
+
       transform: translateY(10px);
+
       pointer-events: none;
+
       transition: opacity 160ms ease, transform 160ms ease;
+
     }
+
     .back-to-top.visible {
+
       opacity: 1;
+
       transform: translateY(0);
+
       pointer-events: auto;
+
     }
+
     @media (max-width: 900px) {
+
       .grid { grid-template-columns: 1fr; }
+
       .grid-4 { grid-template-columns: 1fr; }
+
       .container { padding: 12px 10px 28px; }
+
       h1 { font-size: 22px; }
+
       .top-logos img {
+
         max-width: 120px;
+
         height: 40px;
+
       }
+
       .organ-tab {
+
         padding: 10px 14px;
+
         font-size: 14px;
+
       }
+
       .back-to-top {
+
         right: 12px;
+
         bottom: 12px;
+
         padding: 9px 12px;
+
       }
+
     }
+
   </style>
+
 </head>
+
 <body>
+
   <main class="container">
+
     <section class="card">
+
       <div class="top-logos">
+
         <img src="images/logo-cvn.png" alt="CVN logo">
+
         <img src="images/logo_hopital.png" alt="Hospital logo">
+
       </div>
+
       <h1>Subjective HES Image Evaluation</h1>
+
       <p>This study evaluates a public dataset spanning three organs. These images were not seen during training, so the goal is to assess the generalization of our models.</p>
+
       <p>Please evaluate the generated HES images given the corresponding HE inputs. For each patch, select the quality for HES model 1 and HES model 2.</p>
-      <p class="muted">Focus on the quality of the saffron staining added relative to the HE input image.</p>
+
+      <p class="muted">Focus on the quality of the saffron staining (intensity and colored tissue regions) added relative to the HE input image.</p>
+
       <p>
         Quality levels:
+        <strong class="quality-very-good">Very good quality</strong>,
         <strong class="quality-good">Good quality</strong>,
         <strong class="quality-intermediate">Medium quality</strong>,
         <strong class="quality-bad">Bad quality</strong>.
       </p>
       <p class="muted"><strong class="quality-bad">Bad quality</strong>: absence of saffron in the generated HES image, or saffron presence is not realistic.</p>
-      <p class="muted"><strong class="quality-intermediate">Medium quality</strong>: saffron is present, but it looks only slightly realistic.</p>
-      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is present and looks much more realistic.</p>
+
+      <p class="muted"><strong class="quality-intermediate">Medium quality</strong>: saffron is present, but it looks slightly realistic.</p>
+
+      <p class="muted"><strong class="quality-very-good">Very good quality</strong>: saffron is present and looks much more realistic (in cases where GT is available).</p>
+      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is present and looks realistic.</p>
       <p class="muted">Responses are auto-saved in your browser on this computer.</p>
+
       <div class="toolbar">
+
         <button id="btn-export-csv" type="button">Export CSV</button>
+
         <button id="btn-export-json" type="button">Export JSON</button>
+
         <button id="btn-reset" type="button">Reset responses</button>
+
       </div>
+
       <div class="model-summary">
+
         <h3>Model 1</h3>
+
         <table class="summary" aria-label="Model 1 recap by organ">
+
           <thead>
+
             <tr>
+
               <th>Organ</th>
+
+              <th class="quality-very-good">Very good</th>
               <th class="quality-good">Good</th>
               <th class="quality-intermediate">Medium</th>
+
               <th class="quality-bad">Bad</th>
+
               <th>Progress</th>
+
             </tr>
+
           </thead>
+
           <tbody>
+
             <tr>
+
               <td>Breast</td>
+
+              <td id="m1-breast-very-good">0</td>
               <td id="m1-breast-good">0</td>
+
               <td id="m1-breast-intermediate">0</td>
+
               <td id="m1-breast-bad">0</td>
+
               <td id="m1-breast-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Colon</td>
+
+              <td id="m1-colon-very-good">0</td>
               <td id="m1-colon-good">0</td>
+
               <td id="m1-colon-intermediate">0</td>
+
               <td id="m1-colon-bad">0</td>
+
               <td id="m1-colon-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Lung</td>
+
+              <td id="m1-lung-very-good">0</td>
               <td id="m1-lung-good">0</td>
+
               <td id="m1-lung-intermediate">0</td>
+
               <td id="m1-lung-bad">0</td>
+
               <td id="m1-lung-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Liver</td>
+
+              <td id="m1-liver-very-good">0</td>
               <td id="m1-liver-good">0</td>
+
               <td id="m1-liver-intermediate">0</td>
+
               <td id="m1-liver-bad">0</td>
+
               <td id="m1-liver-progress" class="progress-col">0/14</td>
+
             </tr>
+
           </tbody>
+
         </table>
+
       </div>
+
       <div class="model-summary">
+
         <h3>Model 2</h3>
+
         <table class="summary" aria-label="Model 2 recap by organ">
+
           <thead>
+
             <tr>
+
               <th>Organ</th>
+
+              <th class="quality-very-good">Very good</th>
               <th class="quality-good">Good</th>
               <th class="quality-intermediate">Medium</th>
+
               <th class="quality-bad">Bad</th>
+
               <th>Progress</th>
+
             </tr>
+
           </thead>
+
           <tbody>
+
             <tr>
+
               <td>Breast</td>
+
+              <td id="m2-breast-very-good">0</td>
               <td id="m2-breast-good">0</td>
+
               <td id="m2-breast-intermediate">0</td>
+
               <td id="m2-breast-bad">0</td>
+
               <td id="m2-breast-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Colon</td>
+
+              <td id="m2-colon-very-good">0</td>
               <td id="m2-colon-good">0</td>
+
               <td id="m2-colon-intermediate">0</td>
+
               <td id="m2-colon-bad">0</td>
+
               <td id="m2-colon-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Lung</td>
+
+              <td id="m2-lung-very-good">0</td>
               <td id="m2-lung-good">0</td>
+
               <td id="m2-lung-intermediate">0</td>
+
               <td id="m2-lung-bad">0</td>
+
               <td id="m2-lung-progress" class="progress-col">0/14</td>
+
             </tr>
+
             <tr>
+
               <td>Liver</td>
+
+              <td id="m2-liver-very-good">0</td>
               <td id="m2-liver-good">0</td>
+
               <td id="m2-liver-intermediate">0</td>
+
               <td id="m2-liver-bad">0</td>
+
               <td id="m2-liver-progress" class="progress-col">0/14</td>
+
             </tr>
+
           </tbody>
+
         </table>
+
       </div>
+
       <p class="footer-note">Tip: after finishing, click Export CSV/JSON and send the exported file.</p>
+
     </section>
 
+
+
     <nav class="organ-tabs" id="organ-tabs" aria-label="Organ tabs"></nav>
+
     <p class="organ-help" id="organ-help-msg">After completing the quality evaluation of generated images for one organ, please move to the next tab.</p>
 
 
+
+
+
         <section class="organ-section" id="organ-breast" data-source="wssb">
+
       <h2>Organ: Breast</h2>
+
       
+
         <article class="patch-row" data-row-id="breast_0001">
+
           <div class="patch-title">Patch 1</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0001_01_p00.png" alt="HE Breast patch 1">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0001_01_p00.png" alt="HES model 1 Breast patch 1">
+
               <label class="select-label" for="breast_patch_1_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_1_hes1_quality" name="breast_patch_1_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0001_01_p00.png" alt="HES model 2 Breast patch 1">
+
               <label class="select-label" for="breast_patch_1_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_1_hes2_quality" name="breast_patch_1_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0002">
+
           <div class="patch-title">Patch 2</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0001_01_p01.png" alt="HE Breast patch 2">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0001_01_p01.png" alt="HES model 1 Breast patch 2">
+
               <label class="select-label" for="breast_patch_2_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_2_hes1_quality" name="breast_patch_2_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0001_01_p01.png" alt="HES model 2 Breast patch 2">
+
               <label class="select-label" for="breast_patch_2_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_2_hes2_quality" name="breast_patch_2_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0003">
+
           <div class="patch-title">Patch 3</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0002_02_p01.png" alt="HE Breast patch 3">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0002_02_p01.png" alt="HES model 1 Breast patch 3">
+
               <label class="select-label" for="breast_patch_3_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_3_hes1_quality" name="breast_patch_3_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0002_02_p01.png" alt="HES model 2 Breast patch 3">
+
               <label class="select-label" for="breast_patch_3_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_3_hes2_quality" name="breast_patch_3_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0004">
+
           <div class="patch-title">Patch 4</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0003_03_p10.png" alt="HE Breast patch 4">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0003_03_p10.png" alt="HES model 1 Breast patch 4">
+
               <label class="select-label" for="breast_patch_4_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_4_hes1_quality" name="breast_patch_4_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0003_03_p10.png" alt="HES model 2 Breast patch 4">
+
               <label class="select-label" for="breast_patch_4_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_4_hes2_quality" name="breast_patch_4_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0005">
+
           <div class="patch-title">Patch 5</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0003_03_p11.png" alt="HE Breast patch 5">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0003_03_p11.png" alt="HES model 1 Breast patch 5">
+
               <label class="select-label" for="breast_patch_5_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_5_hes1_quality" name="breast_patch_5_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0003_03_p11.png" alt="HES model 2 Breast patch 5">
+
               <label class="select-label" for="breast_patch_5_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_5_hes2_quality" name="breast_patch_5_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0006">
+
           <div class="patch-title">Patch 6</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0004_08_p00.png" alt="HE Breast patch 6">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0004_08_p00.png" alt="HES model 1 Breast patch 6">
+
               <label class="select-label" for="breast_patch_6_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_6_hes1_quality" name="breast_patch_6_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0004_08_p00.png" alt="HES model 2 Breast patch 6">
+
               <label class="select-label" for="breast_patch_6_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_6_hes2_quality" name="breast_patch_6_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0007">
+
           <div class="patch-title">Patch 7</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0004_08_p01.png" alt="HE Breast patch 7">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0004_08_p01.png" alt="HES model 1 Breast patch 7">
+
               <label class="select-label" for="breast_patch_7_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_7_hes1_quality" name="breast_patch_7_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0004_08_p01.png" alt="HES model 2 Breast patch 7">
+
               <label class="select-label" for="breast_patch_7_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_7_hes2_quality" name="breast_patch_7_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0008">
+
           <div class="patch-title">Patch 8</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0004_08_p11.png" alt="HE Breast patch 8">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0004_08_p11.png" alt="HES model 1 Breast patch 8">
+
               <label class="select-label" for="breast_patch_8_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_8_hes1_quality" name="breast_patch_8_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0004_08_p11.png" alt="HES model 2 Breast patch 8">
+
               <label class="select-label" for="breast_patch_8_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_8_hes2_quality" name="breast_patch_8_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0009">
+
           <div class="patch-title">Patch 9</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0005_01_p00.png" alt="HE Breast patch 9">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0005_01_p00.png" alt="HES model 1 Breast patch 9">
+
               <label class="select-label" for="breast_patch_9_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_9_hes1_quality" name="breast_patch_9_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0005_01_p00.png" alt="HES model 2 Breast patch 9">
+
               <label class="select-label" for="breast_patch_9_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_9_hes2_quality" name="breast_patch_9_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0010">
+
           <div class="patch-title">Patch 10</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0005_01_p01.png" alt="HE Breast patch 10">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0005_01_p01.png" alt="HES model 1 Breast patch 10">
+
               <label class="select-label" for="breast_patch_10_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_10_hes1_quality" name="breast_patch_10_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0005_01_p01.png" alt="HES model 2 Breast patch 10">
+
               <label class="select-label" for="breast_patch_10_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_10_hes2_quality" name="breast_patch_10_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0011">
+
           <div class="patch-title">Patch 11</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0005_01_p10.png" alt="HE Breast patch 11">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0005_01_p10.png" alt="HES model 1 Breast patch 11">
+
               <label class="select-label" for="breast_patch_11_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_11_hes1_quality" name="breast_patch_11_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0005_01_p10.png" alt="HES model 2 Breast patch 11">
+
               <label class="select-label" for="breast_patch_11_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_11_hes2_quality" name="breast_patch_11_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0012">
+
           <div class="patch-title">Patch 12</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0005_01_p11.png" alt="HE Breast patch 12">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0005_01_p11.png" alt="HES model 1 Breast patch 12">
+
               <label class="select-label" for="breast_patch_12_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_12_hes1_quality" name="breast_patch_12_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0005_01_p11.png" alt="HES model 2 Breast patch 12">
+
               <label class="select-label" for="breast_patch_12_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_12_hes2_quality" name="breast_patch_12_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0013">
+
           <div class="patch-title">Patch 13</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0006_06_p01.png" alt="HE Breast patch 13">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0006_06_p01.png" alt="HES model 1 Breast patch 13">
+
               <label class="select-label" for="breast_patch_13_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_13_hes1_quality" name="breast_patch_13_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0006_06_p01.png" alt="HES model 2 Breast patch 13">
+
               <label class="select-label" for="breast_patch_13_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_13_hes2_quality" name="breast_patch_13_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="breast_0014">
+
           <div class="patch-title">Patch 14</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/breast/0006_06_p11.png" alt="HE Breast patch 14">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/breast/0006_06_p11.png" alt="HES model 1 Breast patch 14">
+
               <label class="select-label" for="breast_patch_14_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="breast_patch_14_hes1_quality" name="breast_patch_14_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/breast/0006_06_p11.png" alt="HES model 2 Breast patch 14">
+
               <label class="select-label" for="breast_patch_14_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="breast_patch_14_hes2_quality" name="breast_patch_14_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
       <div class="organ-nav organ-nav-right organ-nav-end">
+
         <button type="button" class="organ-jump" data-target="organ-colon">Next organ: Colon</button>
+
       </div>
+
     </section>
+
+
 
     <section class="organ-section" id="organ-colon" data-source="wssb">
+
       <h2>Organ: Colon</h2>
+
       
+
         <article class="patch-row" data-row-id="colon_0001">
+
           <div class="patch-title">Patch 1</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0001_01.bmp" alt="HE Colon patch 1">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0001_01.bmp" alt="HES model 1 Colon patch 1">
+
               <label class="select-label" for="colon_patch_1_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_1_hes1_quality" name="colon_patch_1_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0001_01.bmp" alt="HES model 2 Colon patch 1">
+
               <label class="select-label" for="colon_patch_1_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_1_hes2_quality" name="colon_patch_1_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0002">
+
           <div class="patch-title">Patch 2</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0002_02.bmp" alt="HE Colon patch 2">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0002_02.bmp" alt="HES model 1 Colon patch 2">
+
               <label class="select-label" for="colon_patch_2_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_2_hes1_quality" name="colon_patch_2_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0002_02.bmp" alt="HES model 2 Colon patch 2">
+
               <label class="select-label" for="colon_patch_2_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_2_hes2_quality" name="colon_patch_2_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0003">
+
           <div class="patch-title">Patch 3</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0003_01.bmp" alt="HE Colon patch 3">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0003_01.bmp" alt="HES model 1 Colon patch 3">
+
               <label class="select-label" for="colon_patch_3_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_3_hes1_quality" name="colon_patch_3_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0003_01.bmp" alt="HES model 2 Colon patch 3">
+
               <label class="select-label" for="colon_patch_3_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_3_hes2_quality" name="colon_patch_3_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0004">
+
           <div class="patch-title">Patch 4</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0004_02.bmp" alt="HE Colon patch 4">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0004_02.bmp" alt="HES model 1 Colon patch 4">
+
               <label class="select-label" for="colon_patch_4_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_4_hes1_quality" name="colon_patch_4_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0004_02.bmp" alt="HES model 2 Colon patch 4">
+
               <label class="select-label" for="colon_patch_4_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_4_hes2_quality" name="colon_patch_4_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0005">
+
           <div class="patch-title">Patch 5</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0005_01.bmp" alt="HE Colon patch 5">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0005_01.bmp" alt="HES model 1 Colon patch 5">
+
               <label class="select-label" for="colon_patch_5_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_5_hes1_quality" name="colon_patch_5_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0005_01.bmp" alt="HES model 2 Colon patch 5">
+
               <label class="select-label" for="colon_patch_5_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_5_hes2_quality" name="colon_patch_5_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0006">
+
           <div class="patch-title">Patch 6</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0006_02.bmp" alt="HE Colon patch 6">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0006_02.bmp" alt="HES model 1 Colon patch 6">
+
               <label class="select-label" for="colon_patch_6_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_6_hes1_quality" name="colon_patch_6_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0006_02.bmp" alt="HES model 2 Colon patch 6">
+
               <label class="select-label" for="colon_patch_6_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_6_hes2_quality" name="colon_patch_6_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0007">
+
           <div class="patch-title">Patch 7</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0007_01.bmp" alt="HE Colon patch 7">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0007_01.bmp" alt="HES model 1 Colon patch 7">
+
               <label class="select-label" for="colon_patch_7_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_7_hes1_quality" name="colon_patch_7_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0007_01.bmp" alt="HES model 2 Colon patch 7">
+
               <label class="select-label" for="colon_patch_7_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_7_hes2_quality" name="colon_patch_7_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0008">
+
           <div class="patch-title">Patch 8</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0008_02.bmp" alt="HE Colon patch 8">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0008_02.bmp" alt="HES model 1 Colon patch 8">
+
               <label class="select-label" for="colon_patch_8_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_8_hes1_quality" name="colon_patch_8_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0008_02.bmp" alt="HES model 2 Colon patch 8">
+
               <label class="select-label" for="colon_patch_8_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_8_hes2_quality" name="colon_patch_8_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0009">
+
           <div class="patch-title">Patch 9</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0009_01.bmp" alt="HE Colon patch 9">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0009_01.bmp" alt="HES model 1 Colon patch 9">
+
               <label class="select-label" for="colon_patch_9_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_9_hes1_quality" name="colon_patch_9_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0009_01.bmp" alt="HES model 2 Colon patch 9">
+
               <label class="select-label" for="colon_patch_9_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_9_hes2_quality" name="colon_patch_9_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0010">
+
           <div class="patch-title">Patch 10</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0010_02.bmp" alt="HE Colon patch 10">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0010_02.bmp" alt="HES model 1 Colon patch 10">
+
               <label class="select-label" for="colon_patch_10_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_10_hes1_quality" name="colon_patch_10_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0010_02.bmp" alt="HES model 2 Colon patch 10">
+
               <label class="select-label" for="colon_patch_10_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_10_hes2_quality" name="colon_patch_10_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0011">
+
           <div class="patch-title">Patch 11</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0011_01.bmp" alt="HE Colon patch 11">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0011_01.bmp" alt="HES model 1 Colon patch 11">
+
               <label class="select-label" for="colon_patch_11_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_11_hes1_quality" name="colon_patch_11_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0011_01.bmp" alt="HES model 2 Colon patch 11">
+
               <label class="select-label" for="colon_patch_11_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_11_hes2_quality" name="colon_patch_11_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0012">
+
           <div class="patch-title">Patch 12</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0012_02.bmp" alt="HE Colon patch 12">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0012_02.bmp" alt="HES model 1 Colon patch 12">
+
               <label class="select-label" for="colon_patch_12_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_12_hes1_quality" name="colon_patch_12_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0012_02.bmp" alt="HES model 2 Colon patch 12">
+
               <label class="select-label" for="colon_patch_12_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_12_hes2_quality" name="colon_patch_12_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0013">
+
           <div class="patch-title">Patch 13</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0013_01.bmp" alt="HE Colon patch 13">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0013_01.bmp" alt="HES model 1 Colon patch 13">
+
               <label class="select-label" for="colon_patch_13_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_13_hes1_quality" name="colon_patch_13_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0013_01.bmp" alt="HES model 2 Colon patch 13">
+
               <label class="select-label" for="colon_patch_13_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_13_hes2_quality" name="colon_patch_13_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="colon_0014">
+
           <div class="patch-title">Patch 14</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/colon/0014_02.bmp" alt="HE Colon patch 14">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/colon/0014_02.bmp" alt="HES model 1 Colon patch 14">
+
               <label class="select-label" for="colon_patch_14_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="colon_patch_14_hes1_quality" name="colon_patch_14_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/colon/0014_02.bmp" alt="HES model 2 Colon patch 14">
+
               <label class="select-label" for="colon_patch_14_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="colon_patch_14_hes2_quality" name="colon_patch_14_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
       <div class="organ-nav organ-nav-end">
+
         <button type="button" class="organ-jump" data-target="organ-breast">Back to Breast</button>
+
         <button type="button" class="organ-jump" data-target="organ-lung">Next organ: Lung</button>
+
       </div>
+
     </section>
+
+
 
         <section class="organ-section" id="organ-lung" data-source="wssb">
+
       <h2>Organ: Lung</h2>
+
       
+
         <article class="patch-row" data-row-id="lung_0001">
+
           <div class="patch-title">Patch 1</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0001_01_p00.png" alt="HE Lung patch 1">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0001_01_p00.png" alt="HES model 1 Lung patch 1">
+
               <label class="select-label" for="lung_patch_1_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_1_hes1_quality" name="lung_patch_1_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0001_01_p00.png" alt="HES model 2 Lung patch 1">
+
               <label class="select-label" for="lung_patch_1_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_1_hes2_quality" name="lung_patch_1_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0002">
+
           <div class="patch-title">Patch 2</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
               <img src="images/lung/0001_01_p01.png" alt="HE Lung patch 2">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0001_01_p01.png" alt="HES model 1 Lung patch 2">
+
               <label class="select-label" for="lung_patch_2_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_2_hes1_quality" name="lung_patch_2_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0001_01_p01.png" alt="HES model 2 Lung patch 2">
+
               <label class="select-label" for="lung_patch_2_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_2_hes2_quality" name="lung_patch_2_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0003">
+
           <div class="patch-title">Patch 3</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0001_01_p10.png" alt="HE Lung patch 3">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0001_01_p10.png" alt="HES model 1 Lung patch 3">
+
               <label class="select-label" for="lung_patch_3_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_3_hes1_quality" name="lung_patch_3_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0001_01_p10.png" alt="HES model 2 Lung patch 3">
+
               <label class="select-label" for="lung_patch_3_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_3_hes2_quality" name="lung_patch_3_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0004">
+
           <div class="patch-title">Patch 4</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0001_01_p11.png" alt="HE Lung patch 4">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0001_01_p11.png" alt="HES model 1 Lung patch 4">
+
               <label class="select-label" for="lung_patch_4_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_4_hes1_quality" name="lung_patch_4_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0001_01_p11.png" alt="HES model 2 Lung patch 4">
+
               <label class="select-label" for="lung_patch_4_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_4_hes2_quality" name="lung_patch_4_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0005">
+
           <div class="patch-title">Patch 5</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0002_02_p01.png" alt="HE Lung patch 5">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0002_02_p01.png" alt="HES model 1 Lung patch 5">
+
               <label class="select-label" for="lung_patch_5_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_5_hes1_quality" name="lung_patch_5_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0002_02_p01.png" alt="HES model 2 Lung patch 5">
+
               <label class="select-label" for="lung_patch_5_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_5_hes2_quality" name="lung_patch_5_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0006">
+
           <div class="patch-title">Patch 6</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0002_02_p11.png" alt="HE Lung patch 6">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0002_02_p11.png" alt="HES model 1 Lung patch 6">
+
               <label class="select-label" for="lung_patch_6_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_6_hes1_quality" name="lung_patch_6_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0002_02_p11.png" alt="HES model 2 Lung patch 6">
+
               <label class="select-label" for="lung_patch_6_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_6_hes2_quality" name="lung_patch_6_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0007">
+
           <div class="patch-title">Patch 7</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0003_01_p00.png" alt="HE Lung patch 7">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0003_01_p00.png" alt="HES model 1 Lung patch 7">
+
               <label class="select-label" for="lung_patch_7_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_7_hes1_quality" name="lung_patch_7_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0003_01_p00.png" alt="HES model 2 Lung patch 7">
+
               <label class="select-label" for="lung_patch_7_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_7_hes2_quality" name="lung_patch_7_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0008">
+
           <div class="patch-title">Patch 8</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0003_01_p01.png" alt="HE Lung patch 8">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0003_01_p01.png" alt="HES model 1 Lung patch 8">
+
               <label class="select-label" for="lung_patch_8_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_8_hes1_quality" name="lung_patch_8_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0003_01_p01.png" alt="HES model 2 Lung patch 8">
+
               <label class="select-label" for="lung_patch_8_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_8_hes2_quality" name="lung_patch_8_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0009">
+
           <div class="patch-title">Patch 9</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0003_01_p10.png" alt="HE Lung patch 9">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0003_01_p10.png" alt="HES model 1 Lung patch 9">
+
               <label class="select-label" for="lung_patch_9_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_9_hes1_quality" name="lung_patch_9_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0003_01_p10.png" alt="HES model 2 Lung patch 9">
+
               <label class="select-label" for="lung_patch_9_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_9_hes2_quality" name="lung_patch_9_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0010">
+
           <div class="patch-title">Patch 10</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0003_01_p11.png" alt="HE Lung patch 10">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0003_01_p11.png" alt="HES model 1 Lung patch 10">
+
               <label class="select-label" for="lung_patch_10_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_10_hes1_quality" name="lung_patch_10_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0003_01_p11.png" alt="HES model 2 Lung patch 10">
+
               <label class="select-label" for="lung_patch_10_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_10_hes2_quality" name="lung_patch_10_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0011">
+
           <div class="patch-title">Patch 11</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0004_02_p00.png" alt="HE Lung patch 11">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0004_02_p00.png" alt="HES model 1 Lung patch 11">
+
               <label class="select-label" for="lung_patch_11_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_11_hes1_quality" name="lung_patch_11_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0004_02_p00.png" alt="HES model 2 Lung patch 11">
+
               <label class="select-label" for="lung_patch_11_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_11_hes2_quality" name="lung_patch_11_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0012">
+
           <div class="patch-title">Patch 12</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0004_02_p01.png" alt="HE Lung patch 12">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0004_02_p01.png" alt="HES model 1 Lung patch 12">
+
               <label class="select-label" for="lung_patch_12_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_12_hes1_quality" name="lung_patch_12_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0004_02_p01.png" alt="HES model 2 Lung patch 12">
+
               <label class="select-label" for="lung_patch_12_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_12_hes2_quality" name="lung_patch_12_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
         <article class="patch-row" data-row-id="lung_0013">
+
           <div class="patch-title">Patch 13</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0004_02_p10.png" alt="HE Lung patch 13">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0004_02_p10.png" alt="HES model 1 Lung patch 13">
+
               <label class="select-label" for="lung_patch_13_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_13_hes1_quality" name="lung_patch_13_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0004_02_p10.png" alt="HES model 2 Lung patch 13">
+
               <label class="select-label" for="lung_patch_13_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_13_hes2_quality" name="lung_patch_13_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
 
+
+
         <article class="patch-row" data-row-id="lung_0014">
+
           <div class="patch-title">Patch 14</div>
+
           <div class="grid">
+
             <div class="cell">
+
               <div class="label">HE input</div>
+
               <img src="images/lung/0004_02_p11.png" alt="HE Lung patch 14">
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 1</div>
+
               <img src="generated_hes/cfm/lung/0004_02_p11.png" alt="HES model 1 Lung patch 14">
+
               <label class="select-label" for="lung_patch_14_hes1_quality">Quality</label>
+
               <select class="quality quality-hes1" id="lung_patch_14_hes1_quality" name="lung_patch_14_hes1_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
             <div class="cell">
+
               <div class="label">HES model 2</div>
+
               <img src="generated_hes/unet/lung/0004_02_p11.png" alt="HES model 2 Lung patch 14">
+
               <label class="select-label" for="lung_patch_14_hes2_quality">Quality</label>
+
               <select class="quality quality-hes2" id="lung_patch_14_hes2_quality" name="lung_patch_14_hes2_quality">
+
                 <option value="">-- Select quality --</option>
+
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
+
                 <option value="Bad quality">Bad quality</option>
+
               </select>
+
             </div>
+
           </div>
+
         </article>
+
+
 
     </section>
 
 
-                          <section class="organ-section" id="organ-liver" data-source="bicetre">
+
+
+
+                              <section class="organ-section" id="organ-liver" data-source="bicetre">
       <h2>Organ: Liver</h2>
       
         <article class="patch-row" data-row-id="liver_0001">
@@ -1880,15 +3739,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x004096.png" alt="HE Liver patch 1">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x004096.png" alt="HES model 2 Liver patch 1">
-              <label class="select-label" for="liver_patch_1_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_1_hes2_quality" name="liver_patch_1_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x004096.png" alt="HES ground truth Liver patch 1">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -1896,14 +3748,23 @@
               <label class="select-label" for="liver_patch_1_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_1_hes1_quality" name="liver_patch_1_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x004096.png" alt="HES ground truth Liver patch 1">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x004096.png" alt="HES model 2 Liver patch 1">
+              <label class="select-label" for="liver_patch_1_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_1_hes2_quality" name="liver_patch_1_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -1916,15 +3777,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x014336.png" alt="HE Liver patch 2">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x014336.png" alt="HES model 2 Liver patch 2">
-              <label class="select-label" for="liver_patch_2_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_2_hes2_quality" name="liver_patch_2_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x014336.png" alt="HES ground truth Liver patch 2">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -1932,14 +3786,23 @@
               <label class="select-label" for="liver_patch_2_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_2_hes1_quality" name="liver_patch_2_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x014336.png" alt="HES ground truth Liver patch 2">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y002048_x014336.png" alt="HES model 2 Liver patch 2">
+              <label class="select-label" for="liver_patch_2_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_2_hes2_quality" name="liver_patch_2_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -1952,15 +3815,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x012288.png" alt="HE Liver patch 3">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x012288.png" alt="HES model 2 Liver patch 3">
-              <label class="select-label" for="liver_patch_3_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_3_hes2_quality" name="liver_patch_3_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x012288.png" alt="HES ground truth Liver patch 3">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -1968,14 +3824,23 @@
               <label class="select-label" for="liver_patch_3_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_3_hes1_quality" name="liver_patch_3_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x012288.png" alt="HES ground truth Liver patch 3">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x012288.png" alt="HES model 2 Liver patch 3">
+              <label class="select-label" for="liver_patch_3_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_3_hes2_quality" name="liver_patch_3_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -1988,15 +3853,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x014336.png" alt="HE Liver patch 4">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x014336.png" alt="HES model 2 Liver patch 4">
-              <label class="select-label" for="liver_patch_4_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_4_hes2_quality" name="liver_patch_4_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x014336.png" alt="HES ground truth Liver patch 4">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2004,14 +3862,23 @@
               <label class="select-label" for="liver_patch_4_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_4_hes1_quality" name="liver_patch_4_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x014336.png" alt="HES ground truth Liver patch 4">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y004096_x014336.png" alt="HES model 2 Liver patch 4">
+              <label class="select-label" for="liver_patch_4_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_4_hes2_quality" name="liver_patch_4_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2024,15 +3891,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y006144_x006144.png" alt="HE Liver patch 5">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y006144_x006144.png" alt="HES model 2 Liver patch 5">
-              <label class="select-label" for="liver_patch_5_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_5_hes2_quality" name="liver_patch_5_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y006144_x006144.png" alt="HES ground truth Liver patch 5">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2040,14 +3900,23 @@
               <label class="select-label" for="liver_patch_5_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_5_hes1_quality" name="liver_patch_5_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y006144_x006144.png" alt="HES ground truth Liver patch 5">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y006144_x006144.png" alt="HES model 2 Liver patch 5">
+              <label class="select-label" for="liver_patch_5_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_5_hes2_quality" name="liver_patch_5_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2060,15 +3929,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x004096.png" alt="HE Liver patch 6">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x004096.png" alt="HES model 2 Liver patch 6">
-              <label class="select-label" for="liver_patch_6_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_6_hes2_quality" name="liver_patch_6_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x004096.png" alt="HES ground truth Liver patch 6">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2076,14 +3938,23 @@
               <label class="select-label" for="liver_patch_6_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_6_hes1_quality" name="liver_patch_6_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x004096.png" alt="HES ground truth Liver patch 6">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x004096.png" alt="HES model 2 Liver patch 6">
+              <label class="select-label" for="liver_patch_6_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_6_hes2_quality" name="liver_patch_6_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2096,15 +3967,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x010240.png" alt="HE Liver patch 7">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x010240.png" alt="HES model 2 Liver patch 7">
-              <label class="select-label" for="liver_patch_7_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_7_hes2_quality" name="liver_patch_7_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x010240.png" alt="HES ground truth Liver patch 7">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2112,14 +3976,23 @@
               <label class="select-label" for="liver_patch_7_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_7_hes1_quality" name="liver_patch_7_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x010240.png" alt="HES ground truth Liver patch 7">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y008192_x010240.png" alt="HES model 2 Liver patch 7">
+              <label class="select-label" for="liver_patch_7_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_7_hes2_quality" name="liver_patch_7_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2132,15 +4005,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x006144.png" alt="HE Liver patch 8">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x006144.png" alt="HES model 2 Liver patch 8">
-              <label class="select-label" for="liver_patch_8_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_8_hes2_quality" name="liver_patch_8_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x006144.png" alt="HES ground truth Liver patch 8">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2148,14 +4014,23 @@
               <label class="select-label" for="liver_patch_8_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_8_hes1_quality" name="liver_patch_8_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x006144.png" alt="HES ground truth Liver patch 8">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x006144.png" alt="HES model 2 Liver patch 8">
+              <label class="select-label" for="liver_patch_8_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_8_hes2_quality" name="liver_patch_8_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2168,15 +4043,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x012288.png" alt="HE Liver patch 9">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x012288.png" alt="HES model 2 Liver patch 9">
-              <label class="select-label" for="liver_patch_9_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_9_hes2_quality" name="liver_patch_9_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x012288.png" alt="HES ground truth Liver patch 9">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2184,14 +4052,23 @@
               <label class="select-label" for="liver_patch_9_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_9_hes1_quality" name="liver_patch_9_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x012288.png" alt="HES ground truth Liver patch 9">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y010240_x012288.png" alt="HES model 2 Liver patch 9">
+              <label class="select-label" for="liver_patch_9_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_9_hes2_quality" name="liver_patch_9_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2204,15 +4081,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x004096.png" alt="HE Liver patch 10">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x004096.png" alt="HES model 2 Liver patch 10">
-              <label class="select-label" for="liver_patch_10_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_10_hes2_quality" name="liver_patch_10_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x004096.png" alt="HES ground truth Liver patch 10">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2220,14 +4090,23 @@
               <label class="select-label" for="liver_patch_10_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_10_hes1_quality" name="liver_patch_10_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x004096.png" alt="HES ground truth Liver patch 10">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x004096.png" alt="HES model 2 Liver patch 10">
+              <label class="select-label" for="liver_patch_10_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_10_hes2_quality" name="liver_patch_10_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2240,15 +4119,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x012288.png" alt="HE Liver patch 11">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x012288.png" alt="HES model 2 Liver patch 11">
-              <label class="select-label" for="liver_patch_11_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_11_hes2_quality" name="liver_patch_11_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x012288.png" alt="HES ground truth Liver patch 11">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2256,14 +4128,23 @@
               <label class="select-label" for="liver_patch_11_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_11_hes1_quality" name="liver_patch_11_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x012288.png" alt="HES ground truth Liver patch 11">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y016384_x012288.png" alt="HES model 2 Liver patch 11">
+              <label class="select-label" for="liver_patch_11_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_11_hes2_quality" name="liver_patch_11_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2276,15 +4157,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y018432_x008192.png" alt="HE Liver patch 12">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y018432_x008192.png" alt="HES model 2 Liver patch 12">
-              <label class="select-label" for="liver_patch_12_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_12_hes2_quality" name="liver_patch_12_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y018432_x008192.png" alt="HES ground truth Liver patch 12">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2292,14 +4166,23 @@
               <label class="select-label" for="liver_patch_12_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_12_hes1_quality" name="liver_patch_12_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y018432_x008192.png" alt="HES ground truth Liver patch 12">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y018432_x008192.png" alt="HES model 2 Liver patch 12">
+              <label class="select-label" for="liver_patch_12_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_12_hes2_quality" name="liver_patch_12_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2312,15 +4195,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y020480_x010240.png" alt="HE Liver patch 13">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y020480_x010240.png" alt="HES model 2 Liver patch 13">
-              <label class="select-label" for="liver_patch_13_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_13_hes2_quality" name="liver_patch_13_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y020480_x010240.png" alt="HES ground truth Liver patch 13">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2328,14 +4204,23 @@
               <label class="select-label" for="liver_patch_13_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_13_hes1_quality" name="liver_patch_13_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y020480_x010240.png" alt="HES ground truth Liver patch 13">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y020480_x010240.png" alt="HES model 2 Liver patch 13">
+              <label class="select-label" for="liver_patch_13_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_13_hes2_quality" name="liver_patch_13_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
@@ -2348,15 +4233,8 @@
               <img src="images/liver/DigitalSlide_E2M_3S_1_Default_Extended_y022528_x014336.png" alt="HE Liver patch 14">
             </div>
             <div class="cell">
-              <div class="label">HES model 2</div>
-              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y022528_x014336.png" alt="HES model 2 Liver patch 14">
-              <label class="select-label" for="liver_patch_14_hes2_quality">Quality</label>
-              <select class="quality quality-hes2" id="liver_patch_14_hes2_quality" name="liver_patch_14_hes2_quality">
-                <option value="">-- Select quality --</option>
-                <option value="Good quality">Good quality</option>
-                <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
-              </select>
+              <div class="label">HES ground truth</div>
+              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y022528_x014336.png" alt="HES ground truth Liver patch 14">
             </div>
             <div class="cell">
               <div class="label">HES model 1</div>
@@ -2364,19 +4242,29 @@
               <label class="select-label" for="liver_patch_14_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_14_hes1_quality" name="liver_patch_14_hes1_quality">
                 <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
                 <option value="Good quality">Good quality</option>
                 <option value="Medium quality">Medium quality</option>
                 <option value="Bad quality">Bad quality</option>
               </select>
             </div>
             <div class="cell">
-              <div class="label">HES ground truth</div>
-              <img src="ground-truth/liver/DigitalSlide_E2M_3S_1_Default_Extended_y022528_x014336.png" alt="HES ground truth Liver patch 14">
+              <div class="label">HES model 2</div>
+              <img src="generated_hes/unet/liver/DigitalSlide_E2M_3S_1_Default_Extended_y022528_x014336.png" alt="HES model 2 Liver patch 14">
+              <label class="select-label" for="liver_patch_14_hes2_quality">Quality</label>
+              <select class="quality quality-hes2" id="liver_patch_14_hes2_quality" name="liver_patch_14_hes2_quality">
+                <option value="">-- Select quality --</option>
+                <option value="Very good quality">Very good quality</option>
+                <option value="Good quality">Good quality</option>
+                <option value="Medium quality">Medium quality</option>
+                <option value="Bad quality">Bad quality</option>
+              </select>
             </div>
           </div>
         </article>
 
     </section>
+
     <section class="organ-section" id="organ-bigscale" data-source="bicetre">
       <h2>Large scale</h2>
       <p class="muted">We evaluate at large scale (20480 × 24576), containing 8,320 patches of size 256 × 256.</p>
@@ -2390,25 +4278,35 @@
       </div>
       <div class="zoom-grid">
         <div class="zoom-panel" data-zoom>
+
           <div class="zoom-toolbar">
+
             <button type="button" class="zoom-btn zoom-in">Zoom +</button>
+
             <button type="button" class="zoom-btn zoom-out">Zoom -</button>
+
             <button type="button" class="zoom-btn zoom-reset">Reset</button>
+
             <span>HE</span>
+
           </div>
+
           <div class="zoom-viewport">
+
             <img class="zoom-image" src="big_scale/HE/DigitalSlide_E2M_3S_1_Default_Extended.jpg" alt="HE large-scale image">
+
           </div>
+
         </div>
         <div class="zoom-panel" data-zoom>
           <div class="zoom-toolbar">
             <button type="button" class="zoom-btn zoom-in">Zoom +</button>
             <button type="button" class="zoom-btn zoom-out">Zoom -</button>
             <button type="button" class="zoom-btn zoom-reset">Reset</button>
-            <span>HES model 2</span>
+            <span>HES ground truth</span>
           </div>
           <div class="zoom-viewport">
-            <img class="zoom-image" src="big_scale/UNet/DigitalSlide_E2M_3S_1_Default_Extended.jpg" alt="HES model 2 large-scale image">
+            <img class="zoom-image" src="big_scale/HES/DigitalSlide_E2M_3S_1_Default_Extended.jpg" alt="HES ground truth large-scale image">
           </div>
         </div>
         <div class="zoom-panel" data-zoom>
@@ -2427,55 +4325,102 @@
             <button type="button" class="zoom-btn zoom-in">Zoom +</button>
             <button type="button" class="zoom-btn zoom-out">Zoom -</button>
             <button type="button" class="zoom-btn zoom-reset">Reset</button>
-            <span>HES ground truth</span>
+            <span>HES model 2</span>
           </div>
           <div class="zoom-viewport">
-            <img class="zoom-image" src="big_scale/HES/DigitalSlide_E2M_3S_1_Default_Extended.jpg" alt="HES ground truth large-scale image">
+            <img class="zoom-image" src="big_scale/UNet/DigitalSlide_E2M_3S_1_Default_Extended.jpg" alt="HES model 2 large-scale image">
           </div>
         </div>
+        
       </div>
+
     </section>  </main>
+
   <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">Top</button>
 
+
+
   <script>
+
     const ROWS = [{"row_id": "breast_0001", "organ": "Breast", "patch": 1, "field_hes1": "breast_patch_1_hes1_quality", "field_hes2": "breast_patch_1_hes2_quality"}, {"row_id": "breast_0002", "organ": "Breast", "patch": 2, "field_hes1": "breast_patch_2_hes1_quality", "field_hes2": "breast_patch_2_hes2_quality"}, {"row_id": "breast_0003", "organ": "Breast", "patch": 3, "field_hes1": "breast_patch_3_hes1_quality", "field_hes2": "breast_patch_3_hes2_quality"}, {"row_id": "breast_0004", "organ": "Breast", "patch": 4, "field_hes1": "breast_patch_4_hes1_quality", "field_hes2": "breast_patch_4_hes2_quality"}, {"row_id": "breast_0005", "organ": "Breast", "patch": 5, "field_hes1": "breast_patch_5_hes1_quality", "field_hes2": "breast_patch_5_hes2_quality"}, {"row_id": "breast_0006", "organ": "Breast", "patch": 6, "field_hes1": "breast_patch_6_hes1_quality", "field_hes2": "breast_patch_6_hes2_quality"}, {"row_id": "breast_0007", "organ": "Breast", "patch": 7, "field_hes1": "breast_patch_7_hes1_quality", "field_hes2": "breast_patch_7_hes2_quality"}, {"row_id": "breast_0008", "organ": "Breast", "patch": 8, "field_hes1": "breast_patch_8_hes1_quality", "field_hes2": "breast_patch_8_hes2_quality"}, {"row_id": "breast_0009", "organ": "Breast", "patch": 9, "field_hes1": "breast_patch_9_hes1_quality", "field_hes2": "breast_patch_9_hes2_quality"}, {"row_id": "breast_0010", "organ": "Breast", "patch": 10, "field_hes1": "breast_patch_10_hes1_quality", "field_hes2": "breast_patch_10_hes2_quality"}, {"row_id": "breast_0011", "organ": "Breast", "patch": 11, "field_hes1": "breast_patch_11_hes1_quality", "field_hes2": "breast_patch_11_hes2_quality"}, {"row_id": "breast_0012", "organ": "Breast", "patch": 12, "field_hes1": "breast_patch_12_hes1_quality", "field_hes2": "breast_patch_12_hes2_quality"}, {"row_id": "breast_0013", "organ": "Breast", "patch": 13, "field_hes1": "breast_patch_13_hes1_quality", "field_hes2": "breast_patch_13_hes2_quality"}, {"row_id": "breast_0014", "organ": "Breast", "patch": 14, "field_hes1": "breast_patch_14_hes1_quality", "field_hes2": "breast_patch_14_hes2_quality"}, {"row_id": "colon_0001", "organ": "Colon", "patch": 1, "field_hes1": "colon_patch_1_hes1_quality", "field_hes2": "colon_patch_1_hes2_quality"}, {"row_id": "colon_0002", "organ": "Colon", "patch": 2, "field_hes1": "colon_patch_2_hes1_quality", "field_hes2": "colon_patch_2_hes2_quality"}, {"row_id": "colon_0003", "organ": "Colon", "patch": 3, "field_hes1": "colon_patch_3_hes1_quality", "field_hes2": "colon_patch_3_hes2_quality"}, {"row_id": "colon_0004", "organ": "Colon", "patch": 4, "field_hes1": "colon_patch_4_hes1_quality", "field_hes2": "colon_patch_4_hes2_quality"}, {"row_id": "colon_0005", "organ": "Colon", "patch": 5, "field_hes1": "colon_patch_5_hes1_quality", "field_hes2": "colon_patch_5_hes2_quality"}, {"row_id": "colon_0006", "organ": "Colon", "patch": 6, "field_hes1": "colon_patch_6_hes1_quality", "field_hes2": "colon_patch_6_hes2_quality"}, {"row_id": "colon_0007", "organ": "Colon", "patch": 7, "field_hes1": "colon_patch_7_hes1_quality", "field_hes2": "colon_patch_7_hes2_quality"}, {"row_id": "colon_0008", "organ": "Colon", "patch": 8, "field_hes1": "colon_patch_8_hes1_quality", "field_hes2": "colon_patch_8_hes2_quality"}, {"row_id": "colon_0009", "organ": "Colon", "patch": 9, "field_hes1": "colon_patch_9_hes1_quality", "field_hes2": "colon_patch_9_hes2_quality"}, {"row_id": "colon_0010", "organ": "Colon", "patch": 10, "field_hes1": "colon_patch_10_hes1_quality", "field_hes2": "colon_patch_10_hes2_quality"}, {"row_id": "colon_0011", "organ": "Colon", "patch": 11, "field_hes1": "colon_patch_11_hes1_quality", "field_hes2": "colon_patch_11_hes2_quality"}, {"row_id": "colon_0012", "organ": "Colon", "patch": 12, "field_hes1": "colon_patch_12_hes1_quality", "field_hes2": "colon_patch_12_hes2_quality"}, {"row_id": "colon_0013", "organ": "Colon", "patch": 13, "field_hes1": "colon_patch_13_hes1_quality", "field_hes2": "colon_patch_13_hes2_quality"}, {"row_id": "colon_0014", "organ": "Colon", "patch": 14, "field_hes1": "colon_patch_14_hes1_quality", "field_hes2": "colon_patch_14_hes2_quality"}, {"row_id": "lung_0001", "organ": "Lung", "patch": 1, "field_hes1": "lung_patch_1_hes1_quality", "field_hes2": "lung_patch_1_hes2_quality"}, {"row_id": "lung_0002", "organ": "Lung", "patch": 2, "field_hes1": "lung_patch_2_hes1_quality", "field_hes2": "lung_patch_2_hes2_quality"}, {"row_id": "lung_0003", "organ": "Lung", "patch": 3, "field_hes1": "lung_patch_3_hes1_quality", "field_hes2": "lung_patch_3_hes2_quality"}, {"row_id": "lung_0004", "organ": "Lung", "patch": 4, "field_hes1": "lung_patch_4_hes1_quality", "field_hes2": "lung_patch_4_hes2_quality"}, {"row_id": "lung_0005", "organ": "Lung", "patch": 5, "field_hes1": "lung_patch_5_hes1_quality", "field_hes2": "lung_patch_5_hes2_quality"}, {"row_id": "lung_0006", "organ": "Lung", "patch": 6, "field_hes1": "lung_patch_6_hes1_quality", "field_hes2": "lung_patch_6_hes2_quality"}, {"row_id": "lung_0007", "organ": "Lung", "patch": 7, "field_hes1": "lung_patch_7_hes1_quality", "field_hes2": "lung_patch_7_hes2_quality"}, {"row_id": "lung_0008", "organ": "Lung", "patch": 8, "field_hes1": "lung_patch_8_hes1_quality", "field_hes2": "lung_patch_8_hes2_quality"}, {"row_id": "lung_0009", "organ": "Lung", "patch": 9, "field_hes1": "lung_patch_9_hes1_quality", "field_hes2": "lung_patch_9_hes2_quality"}, {"row_id": "lung_0010", "organ": "Lung", "patch": 10, "field_hes1": "lung_patch_10_hes1_quality", "field_hes2": "lung_patch_10_hes2_quality"}, {"row_id": "lung_0011", "organ": "Lung", "patch": 11, "field_hes1": "lung_patch_11_hes1_quality", "field_hes2": "lung_patch_11_hes2_quality"}, {"row_id": "lung_0012", "organ": "Lung", "patch": 12, "field_hes1": "lung_patch_12_hes1_quality", "field_hes2": "lung_patch_12_hes2_quality"}, {"row_id": "lung_0013", "organ": "Lung", "patch": 13, "field_hes1": "lung_patch_13_hes1_quality", "field_hes2": "lung_patch_13_hes2_quality"}, {"row_id": "lung_0014", "organ": "Lung", "patch": 14, "field_hes1": "lung_patch_14_hes1_quality", "field_hes2": "lung_patch_14_hes2_quality"}, {"row_id": "liver_0001", "organ": "Liver", "patch": 1, "field_hes1": "liver_patch_1_hes1_quality", "field_hes2": "liver_patch_1_hes2_quality"}, {"row_id": "liver_0002", "organ": "Liver", "patch": 2, "field_hes1": "liver_patch_2_hes1_quality", "field_hes2": "liver_patch_2_hes2_quality"}, {"row_id": "liver_0003", "organ": "Liver", "patch": 3, "field_hes1": "liver_patch_3_hes1_quality", "field_hes2": "liver_patch_3_hes2_quality"}, {"row_id": "liver_0004", "organ": "Liver", "patch": 4, "field_hes1": "liver_patch_4_hes1_quality", "field_hes2": "liver_patch_4_hes2_quality"}, {"row_id": "liver_0005", "organ": "Liver", "patch": 5, "field_hes1": "liver_patch_5_hes1_quality", "field_hes2": "liver_patch_5_hes2_quality"}, {"row_id": "liver_0006", "organ": "Liver", "patch": 6, "field_hes1": "liver_patch_6_hes1_quality", "field_hes2": "liver_patch_6_hes2_quality"}, {"row_id": "liver_0007", "organ": "Liver", "patch": 7, "field_hes1": "liver_patch_7_hes1_quality", "field_hes2": "liver_patch_7_hes2_quality"}, {"row_id": "liver_0008", "organ": "Liver", "patch": 8, "field_hes1": "liver_patch_8_hes1_quality", "field_hes2": "liver_patch_8_hes2_quality"}, {"row_id": "liver_0009", "organ": "Liver", "patch": 9, "field_hes1": "liver_patch_9_hes1_quality", "field_hes2": "liver_patch_9_hes2_quality"}, {"row_id": "liver_0010", "organ": "Liver", "patch": 10, "field_hes1": "liver_patch_10_hes1_quality", "field_hes2": "liver_patch_10_hes2_quality"}, {"row_id": "liver_0011", "organ": "Liver", "patch": 11, "field_hes1": "liver_patch_11_hes1_quality", "field_hes2": "liver_patch_11_hes2_quality"}, {"row_id": "liver_0012", "organ": "Liver", "patch": 12, "field_hes1": "liver_patch_12_hes1_quality", "field_hes2": "liver_patch_12_hes2_quality"}, {"row_id": "liver_0013", "organ": "Liver", "patch": 13, "field_hes1": "liver_patch_13_hes1_quality", "field_hes2": "liver_patch_13_hes2_quality"}, {"row_id": "liver_0014", "organ": "Liver", "patch": 14, "field_hes1": "liver_patch_14_hes1_quality", "field_hes2": "liver_patch_14_hes2_quality"}];
-    const QUALITY_LEVELS = ["Good quality", "Medium quality", "Bad quality"];
+
+    const QUALITY_LEVELS = ["Very good quality", "Good quality", "Medium quality", "Bad quality"];
+
     const STORAGE_KEY = "wssb_subjective_eval_v1";
+
     const PROGRESS_ORGANS = ["Breast", "Colon", "Lung", "Liver"];
 
+
+
     const selects = Array.from(document.querySelectorAll("select.quality"));
+
     const selectByName = Object.fromEntries(selects.map((el) => [el.name, el]));
+
     const organTotals = ROWS.reduce((acc, row) => {
+
       acc[row.organ] = (acc[row.organ] || 0) + 1;
+
       return acc;
+
     }, {});
+
     const totalRows = ROWS.length;
 
+
+
     function normalize(value) {
+
       return QUALITY_LEVELS.includes(value) ? value : "";
+
     }
+
+
 
     function applySelectColor(selectEl) {
+
       if (!selectEl) return;
-      selectEl.classList.remove("value-good", "value-intermediate", "value-bad");
+
+      selectEl.classList.remove("value-good", "value-very-good", "value-intermediate", "value-bad");
+
       const v = normalize(selectEl.value);
+
       if (v === "Good quality") selectEl.classList.add("value-good");
+      else if (v === "Very good quality") selectEl.classList.add("value-very-good");
+
       else if (v === "Medium quality") selectEl.classList.add("value-intermediate");
+
       else if (v === "Bad quality") selectEl.classList.add("value-bad");
+
     }
 
+
+
     function styleOptionColors() {
+
       for (const sel of selects) {
+
         for (const opt of sel.options) {
+
           const v = normalize(opt.value);
+
           opt.style.fontWeight = "700";
-          if (v === "Good quality") opt.style.color = "#1e8e3e";
+
+          if (v === "Good quality") opt.style.color = "#1b6ca8";
+          else if (v === "Very good quality") opt.style.color = "#1e8e3e";
+
           else if (v === "Medium quality") opt.style.color = "#d9822b";
+
           else if (v === "Bad quality") opt.style.color = "#c9332f";
+
         }
+
         applySelectColor(sel);
+
       }
+
     }
+
+
 
     function collectState() {
       const state = {};
@@ -2489,6 +4434,7 @@
       return state;
     }
 
+
     function applyState(state) {
       for (const sel of selects) {
         const next = state[sel.name] || "";
@@ -2501,110 +4447,212 @@
       }
     }
 
+
     function saveState() {
+
       const state = collectState();
+
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
     }
+
+
 
     function loadState() {
+
       try {
+
         const raw = localStorage.getItem(STORAGE_KEY);
+
         if (!raw) return;
+
         const parsed = JSON.parse(raw);
+
         if (parsed && typeof parsed === "object") {
+
           applyState(parsed);
+
         }
+
       } catch (err) {
+
         console.warn("Could not load saved state:", err);
+
       }
+
     }
 
+
+
     function updateSummary() {
+
       const emptyCounts = () => ({
         "Good quality": 0,
+        "Very good quality": 0,
         "Medium quality": 0,
         "Bad quality": 0,
       });
       const byOrganM1 = {};
+
       const byOrganM2 = {};
+
       const progressM1 = {};
+
       const progressM2 = {};
+
       for (const organ of PROGRESS_ORGANS) {
+
         byOrganM1[organ] = emptyCounts();
+
         byOrganM2[organ] = emptyCounts();
+
         progressM1[organ] = 0;
+
         progressM2[organ] = 0;
+
       }
+
+
 
       for (const row of ROWS) {
+
         const v1 = normalize((selectByName[row.field_hes1] || {value: ""}).value);
+
         const v2 = normalize((selectByName[row.field_hes2] || {value: ""}).value);
+
         const organ = row.organ;
+
         if (v1) byOrganM1[organ][v1] += 1;
+
         if (v2) byOrganM2[organ][v2] += 1;
+
         if (v1) {
+
           progressM1[organ] += 1;
+
         }
+
         if (v2) {
+
           progressM2[organ] += 1;
+
         }
+
       }
+
+
 
       const keys = { Breast: "breast", Colon: "colon", Lung: "lung", Liver: "liver" };
+
       for (const organ of PROGRESS_ORGANS) {
+
         const key = keys[organ];
+
         document.getElementById(`m1-${key}-good`).textContent = String(byOrganM1[organ]["Good quality"]);
+        document.getElementById(`m1-${key}-very-good`).textContent = String(byOrganM1[organ]["Very good quality"]);
         document.getElementById(`m1-${key}-intermediate`).textContent = String(byOrganM1[organ]["Medium quality"]);
+
         document.getElementById(`m1-${key}-bad`).textContent = String(byOrganM1[organ]["Bad quality"]);
+
         document.getElementById(`m1-${key}-progress`).textContent = `${progressM1[organ]}/${organTotals[organ] || 0}`;
 
+
+
         document.getElementById(`m2-${key}-good`).textContent = String(byOrganM2[organ]["Good quality"]);
+        document.getElementById(`m2-${key}-very-good`).textContent = String(byOrganM2[organ]["Very good quality"]);
         document.getElementById(`m2-${key}-intermediate`).textContent = String(byOrganM2[organ]["Medium quality"]);
+
         document.getElementById(`m2-${key}-bad`).textContent = String(byOrganM2[organ]["Bad quality"]);
+
         document.getElementById(`m2-${key}-progress`).textContent = `${progressM2[organ]}/${organTotals[organ] || 0}`;
+
       }
+
     }
+
+
 
     function downloadBlob(filename, content, mimeType) {
+
       const blob = new Blob([content], { type: mimeType });
+
       const url = URL.createObjectURL(blob);
+
       const a = document.createElement("a");
+
       a.href = url;
+
       a.download = filename;
+
       document.body.appendChild(a);
+
       a.click();
+
       a.remove();
+
       URL.revokeObjectURL(url);
+
     }
 
+
+
     function getDisplayedRows() {
+
       const rows = Array.from(document.querySelectorAll(".organ-section .patch-row"));
+
       return rows.map((rowEl) => {
+
         const rowId = rowEl.dataset.rowId || "";
+
         const organ = (rowId.split("_")[0] || "").replace(/^\w/, (c) => c.toUpperCase());
+
         const title = rowEl.querySelector(".patch-title");
+
         const patchLabel = title ? title.textContent.trim() : "";
+
         const patchNumber = Number((patchLabel.match(/\d+/) || [])[0] || 0);
+
         const imgs = rowEl.querySelectorAll("img");
+
         const heSrc = imgs[0]?.getAttribute("src") || "";
+
         const hes1Src = imgs[1]?.getAttribute("src") || "";
+
         const hes2Src = imgs[2]?.getAttribute("src") || "";
+
         const gtSrc = imgs[3]?.getAttribute("src") || "";
+
         const hes1Select = rowEl.querySelector("select.quality-hes1");
+
         const hes2Select = rowEl.querySelector("select.quality-hes2");
+
         return {
+
           organ,
+
           patch: patchNumber,
+
           row_id: rowId,
+
           he_image: heSrc,
+
           hes_model_1_image: hes1Src,
+
           hes_model_2_image: hes2Src,
+
           gt_image: gtSrc,
+
           hes_model_1_quality: normalize(hes1Select?.value || ""),
+
           hes_model_2_quality: normalize(hes2Select?.value || ""),
+
         };
+
       });
+
     }
+
+
 
     function exportJson() {
       const state = collectState();
@@ -2616,6 +4664,7 @@
       downloadBlob("evaluation_responses.json", JSON.stringify(payload, null, 2), "application/json");
     }
 
+
     function csvEscape(value) {
       const text = String(value ?? "");
       if (text.includes(",") || text.includes("\"") || text.includes("\n")) {
@@ -2624,266 +4673,533 @@
       return text;
     }
 
+
+
+    
+
+
+
     function exportCsv() {
+
       const header = [
+
         "organ",
+
         "patch",
+
         "row_id",
+
         "he_image",
+
         "hes_model_1_image",
+
         "hes_model_2_image",
+
         "gt_image",
+
         "hes_model_1_quality",
+
         "hes_model_2_quality",
+
       ];
+
       const lines = [header.join(",")];
+
       for (const row of getDisplayedRows()) {
+
         const vals = [
+
           row.organ,
+
           row.patch,
+
           row.row_id,
+
           row.he_image,
+
           row.hes_model_1_image,
+
           row.hes_model_2_image,
+
           row.gt_image,
+
           row.hes_model_1_quality,
+
           row.hes_model_2_quality,
+
         ];
+
         lines.push(vals.map(csvEscape).join(","));
+
       }
+
       downloadBlob("evaluation_responses.csv", lines.join("\n"), "text/csv;charset=utf-8");
+
     }
+
+
 
     function resetResponses() {
+
       if (!confirm("Reset all responses?")) return;
+
       for (const sel of selects) {
+
         sel.value = "";
+
       }
+
       saveState();
+
       updateSummary();
+
     }
+
+
 
     function setupOrganTabs() {
+
       const tabsHost = document.getElementById("organ-tabs");
+
       const helpMsg = document.getElementById("organ-help-msg");
+
       const sections = Array.from(document.querySelectorAll(".organ-section"));
+
       if (!tabsHost || sections.length === 0) return;
+
       const sectionsById = Object.fromEntries(sections.map((sec) => [sec.id, sec]));
 
+
+
       function activate(sectionId) {
+
         for (const sec of sections) {
+
           sec.classList.toggle("active", sec.id === sectionId);
+
         }
+
         for (const btn of tabsHost.querySelectorAll(".organ-tab")) {
+
           btn.classList.toggle("active", btn.dataset.target === sectionId);
+
         }
+
         if (helpMsg) {
+
           helpMsg.textContent = "After completing the quality evaluation of generated images for one organ, please move to the next tab.";
+
         }
+
       }
+
+
 
       const groups = [
+
         { title: "Hopital Bicetre", ids: ["organ-liver", "organ-bigscale"] },
+
         { title: "WSSB public dataset", ids: ["organ-breast", "organ-colon", "organ-lung"] },
+
       ];
+
       tabsHost.textContent = "";
+
       for (let g = 0; g < groups.length; g += 1) {
+
         const group = groups[g];
+
         const groupEl = document.createElement("div");
+
         groupEl.className = "organ-group";
+
         const titleEl = document.createElement("span");
+
         titleEl.className = "organ-group-title";
+
         titleEl.textContent = group.title;
+
         groupEl.appendChild(titleEl);
 
+
+
         const buttonsEl = document.createElement("div");
+
         buttonsEl.className = "organ-group-buttons";
+
         for (const id of group.ids) {
+
           const sec = sectionsById[id];
+
           if (!sec) continue;
+
           const h2 = sec.querySelector("h2");
+
           const label = h2 ? h2.textContent.replace(/^Organ:\s*/i, "").trim() : sec.id;
+
           const btn = document.createElement("button");
+
           btn.type = "button";
+
           btn.className = "organ-tab";
+
           btn.dataset.target = sec.id;
+
           btn.textContent = label;
+
           btn.addEventListener("click", () => activate(sec.id));
+
           buttonsEl.appendChild(btn);
+
         }
+
         groupEl.appendChild(buttonsEl);
 
+
+
         tabsHost.appendChild(groupEl);
+
         if (g < groups.length - 1) {
+
           const sep = document.createElement("div");
+
           sep.className = "organ-separator";
+
           tabsHost.appendChild(sep);
+
         }
+
       }
+
+
 
       const jumpButtons = Array.from(document.querySelectorAll(".organ-jump"));
+
       for (const btn of jumpButtons) {
+
         btn.addEventListener("click", () => {
+
           const target = btn.dataset.target;
+
           if (target) activate(target);
+
         });
+
       }
+
+
 
       let initialId = null;
+
       for (const group of groups) {
+
         for (const id of group.ids) {
+
           if (sectionsById[id]) {
+
             initialId = id;
+
             break;
+
           }
+
         }
+
         if (initialId) break;
+
       }
+
       activate(initialId || sections[0].id);
+
     }
+
+
 
     function hashString(value) {
+
       let hash = 5381;
+
       for (let i = 0; i < value.length; i += 1) {
+
         hash = ((hash << 5) + hash) + value.charCodeAt(i);
+
         hash |= 0;
+
       }
+
       return Math.abs(hash);
+
     }
+
+
 
     function makeRng(seedValue) {
+
       let state = seedValue % 2147483647;
+
       if (state <= 0) state += 2147483646;
+
       return () => {
+
         state = (state * 48271) % 2147483647;
+
         return state / 2147483647;
+
       };
+
     }
+
+
 
     function randomizePatchDisplay() {
+
       const seed = "fixed-seed-v2";
+
       const sections = Array.from(document.querySelectorAll(".organ-section"));
+
       for (const sec of sections) {
+
         const rows = Array.from(sec.querySelectorAll(".patch-row"));
+
         const rng = makeRng(hashString(`${seed}:${sec.id}`));
+
         for (let i = rows.length - 1; i > 0; i -= 1) {
+
           const j = Math.floor(rng() * (i + 1));
+
           [rows[i], rows[j]] = [rows[j], rows[i]];
+
         }
+
+
 
         const endAnchor = sec.querySelector(".organ-nav-end") || sec.querySelector(".organ-final-msg");
+
         for (const row of rows) {
+
           if (endAnchor) sec.insertBefore(row, endAnchor);
+
           else sec.appendChild(row);
+
         }
+
+
 
         rows.forEach((row, idx) => {
+
           const title = row.querySelector(".patch-title");
+
           if (title) title.textContent = `Patch ${idx + 1}`;
+
         });
+
       }
+
     }
+
+
 
     function setupBackToTop() {
+
       const btn = document.getElementById("back-to-top");
+
       if (!btn) return;
+
       const onScroll = () => {
+
         btn.classList.toggle("visible", window.scrollY > 260);
+
       };
+
       window.addEventListener("scroll", onScroll, { passive: true });
+
       onScroll();
+
       btn.addEventListener("click", () => {
+
         window.scrollTo({ top: 0, behavior: "smooth" });
+
       });
+
     }
+
+
 
     function setupZoomViewer() {
+
       const panels = Array.from(document.querySelectorAll("[data-zoom]"));
+
       for (const panel of panels) {
+
         const viewport = panel.querySelector(".zoom-viewport");
+
         const img = panel.querySelector(".zoom-image");
+
         const btnIn = panel.querySelector(".zoom-in");
+
         const btnOut = panel.querySelector(".zoom-out");
+
         const btnReset = panel.querySelector(".zoom-reset");
+
         if (!viewport || !img) continue;
 
+
+
         let scale = 1;
+
         const minScale = 1;
+
         let offsetX = 0;
+
         let offsetY = 0;
+
         let isDragging = false;
+
         let startX = 0;
+
         let startY = 0;
 
+
+
         function applyTransform() {
+
           img.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+
         }
+
+
 
         function clampScale(next) {
+
           return Math.min(6, Math.max(minScale, next));
+
         }
+
+
 
         function zoomAt(x, y, factor) {
+
           const rect = viewport.getBoundingClientRect();
+
           const vx = x - rect.left;
+
           const vy = y - rect.top;
+
           const prevScale = scale;
+
           scale = clampScale(scale * factor);
+
           const scaleRatio = scale / prevScale;
+
           offsetX = vx - (vx - offsetX) * scaleRatio;
+
           offsetY = vy - (vy - offsetY) * scaleRatio;
+
           applyTransform();
+
         }
 
+
+
         viewport.addEventListener("wheel", (e) => {
+
           e.preventDefault();
+
           const factor = e.deltaY < 0 ? 1.1 : 0.9;
+
           zoomAt(e.clientX, e.clientY, factor);
+
         }, { passive: false });
 
+
+
         viewport.addEventListener("mousedown", (e) => {
+
           isDragging = true;
+
           startX = e.clientX - offsetX;
+
           startY = e.clientY - offsetY;
+
           viewport.classList.add("grabbing");
+
         });
+
+
 
         window.addEventListener("mousemove", (e) => {
+
           if (!isDragging) return;
+
           offsetX = e.clientX - startX;
+
           offsetY = e.clientY - startY;
+
           applyTransform();
+
         });
+
+
 
         window.addEventListener("mouseup", () => {
+
           isDragging = false;
+
           viewport.classList.remove("grabbing");
+
         });
+
+
 
         viewport.addEventListener("dblclick", () => {
+
           scale = 1;
+
           offsetX = 0;
+
           offsetY = 0;
+
           applyTransform();
+
         });
+
+
 
         btnIn?.addEventListener("click", () => zoomAt(viewport.getBoundingClientRect().left + 10, viewport.getBoundingClientRect().top + 10, 1.2));
+
         btnOut?.addEventListener("click", () => zoomAt(viewport.getBoundingClientRect().left + 10, viewport.getBoundingClientRect().top + 10, 0.8));
+
         btnReset?.addEventListener("click", () => {
+
           scale = 1;
+
           offsetX = 0;
+
           offsetY = 0;
+
           applyTransform();
+
         });
 
+
+
         img.addEventListener("load", () => {
+
           scale = 1;
+
           offsetX = 0;
+
           offsetY = 0;
+
           applyTransform();
+
         });
+
       }
+
     }
+
+
 
     for (const sel of selects) {
       sel.addEventListener("change", () => {
@@ -2899,20 +5215,82 @@
       });
     }
 
+
     document.getElementById("btn-export-json").addEventListener("click", exportJson);
+
     document.getElementById("btn-export-csv").addEventListener("click", exportCsv);
+
     document.getElementById("btn-reset").addEventListener("click", resetResponses);
 
+
+
     loadState();
+
     randomizePatchDisplay();
+
     styleOptionColors();
+
     updateSummary();
+
     setupOrganTabs();
+
     setupBackToTop();
+
     setupZoomViewer();
+
   </script>
+
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
