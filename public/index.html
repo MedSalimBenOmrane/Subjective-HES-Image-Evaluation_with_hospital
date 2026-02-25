@@ -26,11 +26,11 @@
 
       --accent: #2f5e5a;
 
-      --good: #1e8e3e;
+      --high: #1e8e3e;
 
       --intermediate: #d9822b;
 
-      --bad: #c9332f;
+      --poor: #c9332f;
 
     }
 
@@ -172,18 +172,18 @@
 
     }
 
-    .quality-good { color: #1b6ca8; font-weight: 700; }
-    .quality-very-good { color: #1e8e3e; font-weight: 700; }
+    .quality-high { color: #1b6ca8; font-weight: 700; }
+    .quality-very-high { color: #1e8e3e; font-weight: 700; }
     .quality-intermediate { color: var(--intermediate); font-weight: 700; }
 
-    .quality-bad { color: var(--bad); font-weight: 700; }
+    .quality-poor { color: var(--poor); font-weight: 700; }
 
-    select.quality.value-good {
+    select.quality.value-high {
       color: #1b6ca8;
       border-color: #7fb3d5;
       font-weight: 700;
     }
-    select.quality.value-very-good {
+    select.quality.value-very-high {
       color: #1e8e3e;
       border-color: #86c995;
       font-weight: 700;
@@ -198,9 +198,9 @@
 
     }
 
-    select.quality.value-bad {
+    select.quality.value-poor {
 
-      color: var(--bad);
+      color: var(--poor);
 
       border-color: #e09a97;
 
@@ -758,13 +758,13 @@
 
     <section class="card">
 
-      <div class="top-logos">
+    <!--<div class="top-logos">
 
         <img src="images/logo-cvn.png" alt="CVN logo">
 
         <img src="images/logo_hopital.png" alt="Hospital logo">
 
-      </div>
+      </div>-->
 
       <h1>Subjective HES Image Evaluation</h1>
 
@@ -776,17 +776,17 @@
 
       <p>
         Quality levels:
-        <strong class="quality-very-good">Very good quality</strong>,
-        <strong class="quality-good">Good quality</strong>,
+        <strong class="quality-very-high">Very high quality</strong>,
+        <strong class="quality-high">high quality</strong>,
         <strong class="quality-intermediate">Medium quality</strong>,
-        <strong class="quality-bad">Bad quality</strong>.
+        <strong class="quality-poor">poor quality</strong>.
       </p>
-      <p class="muted"><strong class="quality-bad">Bad quality</strong>: absence of saffron in the generated HES image, or saffron presence is not realistic.</p>
+      <p class="muted"><strong class="quality-poor">poor quality</strong>: absence of saffron in the generated HES image, or saffron presence is not realistic.</p>
 
       <p class="muted"><strong class="quality-intermediate">Medium quality</strong>: saffron is present, but it looks slightly realistic.</p>
 
-      <p class="muted"><strong class="quality-good">Good quality</strong>: saffron is present and looks realistic.</p>
-      <p class="muted"><strong class="quality-very-good">Very good quality</strong>: saffron is present and looks much more realistic </p>
+      <p class="muted"><strong class="quality-high">high quality</strong>: saffron is present and looks realistic.</p>
+      <p class="muted"><strong class="quality-very-high">Very high quality</strong>: saffron is present and looks much more realistic </p>
 
       <p class="muted">Responses are auto-saved in your browser on this computer.</p>
 
@@ -812,11 +812,11 @@
 
               <th>Organ</th>
 
-              <th class="quality-very-good">Very good</th>
-              <th class="quality-good">Good</th>
+              <th class="quality-very-high">Very high</th>
+              <th class="quality-high">high</th>
               <th class="quality-intermediate">Medium</th>
 
-              <th class="quality-bad">Bad</th>
+              <th class="quality-poor">poor</th>
 
               <th>Progress</th>
 
@@ -830,12 +830,12 @@
 
               <td>Breast</td>
 
-              <td id="m1-breast-very-good">0</td>
-              <td id="m1-breast-good">0</td>
+              <td id="m1-breast-very-high">0</td>
+              <td id="m1-breast-high">0</td>
 
               <td id="m1-breast-intermediate">0</td>
 
-              <td id="m1-breast-bad">0</td>
+              <td id="m1-breast-poor">0</td>
 
               <td id="m1-breast-progress" class="progress-col">0/14</td>
 
@@ -845,12 +845,12 @@
 
               <td>Colon</td>
 
-              <td id="m1-colon-very-good">0</td>
-              <td id="m1-colon-good">0</td>
+              <td id="m1-colon-very-high">0</td>
+              <td id="m1-colon-high">0</td>
 
               <td id="m1-colon-intermediate">0</td>
 
-              <td id="m1-colon-bad">0</td>
+              <td id="m1-colon-poor">0</td>
 
               <td id="m1-colon-progress" class="progress-col">0/14</td>
 
@@ -860,12 +860,12 @@
 
               <td>Lung</td>
 
-              <td id="m1-lung-very-good">0</td>
-              <td id="m1-lung-good">0</td>
+              <td id="m1-lung-very-high">0</td>
+              <td id="m1-lung-high">0</td>
 
               <td id="m1-lung-intermediate">0</td>
 
-              <td id="m1-lung-bad">0</td>
+              <td id="m1-lung-poor">0</td>
 
               <td id="m1-lung-progress" class="progress-col">0/14</td>
 
@@ -875,12 +875,12 @@
 
               <td>Liver</td>
 
-              <td id="m1-liver-very-good">0</td>
-              <td id="m1-liver-good">0</td>
+              <td id="m1-liver-very-high">0</td>
+              <td id="m1-liver-high">0</td>
 
               <td id="m1-liver-intermediate">0</td>
 
-              <td id="m1-liver-bad">0</td>
+              <td id="m1-liver-poor">0</td>
 
               <td id="m1-liver-progress" class="progress-col">0/14</td>
 
@@ -904,11 +904,11 @@
 
               <th>Organ</th>
 
-              <th class="quality-very-good">Very good</th>
-              <th class="quality-good">Good</th>
+              <th class="quality-very-high">Very high</th>
+              <th class="quality-high">high</th>
               <th class="quality-intermediate">Medium</th>
 
-              <th class="quality-bad">Bad</th>
+              <th class="quality-poor">poor</th>
 
               <th>Progress</th>
 
@@ -922,12 +922,12 @@
 
               <td>Breast</td>
 
-              <td id="m2-breast-very-good">0</td>
-              <td id="m2-breast-good">0</td>
+              <td id="m2-breast-very-high">0</td>
+              <td id="m2-breast-high">0</td>
 
               <td id="m2-breast-intermediate">0</td>
 
-              <td id="m2-breast-bad">0</td>
+              <td id="m2-breast-poor">0</td>
 
               <td id="m2-breast-progress" class="progress-col">0/14</td>
 
@@ -937,12 +937,12 @@
 
               <td>Colon</td>
 
-              <td id="m2-colon-very-good">0</td>
-              <td id="m2-colon-good">0</td>
+              <td id="m2-colon-very-high">0</td>
+              <td id="m2-colon-high">0</td>
 
               <td id="m2-colon-intermediate">0</td>
 
-              <td id="m2-colon-bad">0</td>
+              <td id="m2-colon-poor">0</td>
 
               <td id="m2-colon-progress" class="progress-col">0/14</td>
 
@@ -952,12 +952,12 @@
 
               <td>Lung</td>
 
-              <td id="m2-lung-very-good">0</td>
-              <td id="m2-lung-good">0</td>
+              <td id="m2-lung-very-high">0</td>
+              <td id="m2-lung-high">0</td>
 
               <td id="m2-lung-intermediate">0</td>
 
-              <td id="m2-lung-bad">0</td>
+              <td id="m2-lung-poor">0</td>
 
               <td id="m2-lung-progress" class="progress-col">0/14</td>
 
@@ -967,12 +967,12 @@
 
               <td>Liver</td>
 
-              <td id="m2-liver-very-good">0</td>
-              <td id="m2-liver-good">0</td>
+              <td id="m2-liver-very-high">0</td>
+              <td id="m2-liver-high">0</td>
 
               <td id="m2-liver-intermediate">0</td>
 
-              <td id="m2-liver-bad">0</td>
+              <td id="m2-liver-poor">0</td>
 
               <td id="m2-liver-progress" class="progress-col">0/14</td>
 
@@ -1030,11 +1030,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1052,11 +1052,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1094,11 +1094,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1116,11 +1116,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1158,11 +1158,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1180,11 +1180,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1222,11 +1222,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1244,11 +1244,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1286,11 +1286,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1308,11 +1308,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1350,11 +1350,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1372,11 +1372,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1414,11 +1414,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1436,11 +1436,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1478,11 +1478,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1500,11 +1500,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1542,11 +1542,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1564,11 +1564,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1606,11 +1606,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1628,11 +1628,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1670,11 +1670,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1692,11 +1692,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1734,11 +1734,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1756,11 +1756,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1798,11 +1798,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1820,11 +1820,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1862,11 +1862,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1884,11 +1884,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1942,11 +1942,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -1964,11 +1964,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2006,11 +2006,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2028,11 +2028,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2070,11 +2070,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2092,11 +2092,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2134,11 +2134,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2156,11 +2156,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2198,11 +2198,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2220,11 +2220,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2262,11 +2262,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2284,11 +2284,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2326,11 +2326,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2348,11 +2348,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2390,11 +2390,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2412,11 +2412,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2454,11 +2454,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2476,11 +2476,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2518,11 +2518,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2540,11 +2540,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2582,11 +2582,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2604,11 +2604,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2646,11 +2646,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2668,11 +2668,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2710,11 +2710,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2732,11 +2732,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2774,11 +2774,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2796,11 +2796,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2854,11 +2854,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2876,11 +2876,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2917,11 +2917,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2939,11 +2939,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -2981,11 +2981,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3003,11 +3003,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3045,11 +3045,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3067,11 +3067,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3109,11 +3109,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3131,11 +3131,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3173,11 +3173,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3195,11 +3195,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3237,11 +3237,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3259,11 +3259,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3301,11 +3301,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3323,11 +3323,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3365,11 +3365,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3387,11 +3387,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3429,11 +3429,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3451,11 +3451,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3493,11 +3493,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3515,11 +3515,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3557,11 +3557,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3579,11 +3579,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3621,11 +3621,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3643,11 +3643,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3685,11 +3685,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3707,11 +3707,11 @@
 
                 <option value="">-- Select quality --</option>
 
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
 
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
 
               </select>
 
@@ -3749,10 +3749,10 @@
               <label class="select-label" for="liver_patch_1_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_1_hes1_quality" name="liver_patch_1_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3761,10 +3761,10 @@
               <label class="select-label" for="liver_patch_1_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_1_hes2_quality" name="liver_patch_1_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3787,10 +3787,10 @@
               <label class="select-label" for="liver_patch_2_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_2_hes1_quality" name="liver_patch_2_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3799,10 +3799,10 @@
               <label class="select-label" for="liver_patch_2_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_2_hes2_quality" name="liver_patch_2_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3825,10 +3825,10 @@
               <label class="select-label" for="liver_patch_3_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_3_hes1_quality" name="liver_patch_3_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3837,10 +3837,10 @@
               <label class="select-label" for="liver_patch_3_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_3_hes2_quality" name="liver_patch_3_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3863,10 +3863,10 @@
               <label class="select-label" for="liver_patch_4_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_4_hes1_quality" name="liver_patch_4_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3875,10 +3875,10 @@
               <label class="select-label" for="liver_patch_4_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_4_hes2_quality" name="liver_patch_4_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3901,10 +3901,10 @@
               <label class="select-label" for="liver_patch_5_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_5_hes1_quality" name="liver_patch_5_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3913,10 +3913,10 @@
               <label class="select-label" for="liver_patch_5_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_5_hes2_quality" name="liver_patch_5_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3939,10 +3939,10 @@
               <label class="select-label" for="liver_patch_6_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_6_hes1_quality" name="liver_patch_6_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3951,10 +3951,10 @@
               <label class="select-label" for="liver_patch_6_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_6_hes2_quality" name="liver_patch_6_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -3977,10 +3977,10 @@
               <label class="select-label" for="liver_patch_7_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_7_hes1_quality" name="liver_patch_7_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -3989,10 +3989,10 @@
               <label class="select-label" for="liver_patch_7_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_7_hes2_quality" name="liver_patch_7_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4015,10 +4015,10 @@
               <label class="select-label" for="liver_patch_8_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_8_hes1_quality" name="liver_patch_8_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4027,10 +4027,10 @@
               <label class="select-label" for="liver_patch_8_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_8_hes2_quality" name="liver_patch_8_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4053,10 +4053,10 @@
               <label class="select-label" for="liver_patch_9_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_9_hes1_quality" name="liver_patch_9_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4065,10 +4065,10 @@
               <label class="select-label" for="liver_patch_9_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_9_hes2_quality" name="liver_patch_9_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4091,10 +4091,10 @@
               <label class="select-label" for="liver_patch_10_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_10_hes1_quality" name="liver_patch_10_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4103,10 +4103,10 @@
               <label class="select-label" for="liver_patch_10_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_10_hes2_quality" name="liver_patch_10_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4129,10 +4129,10 @@
               <label class="select-label" for="liver_patch_11_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_11_hes1_quality" name="liver_patch_11_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4141,10 +4141,10 @@
               <label class="select-label" for="liver_patch_11_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_11_hes2_quality" name="liver_patch_11_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4167,10 +4167,10 @@
               <label class="select-label" for="liver_patch_12_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_12_hes1_quality" name="liver_patch_12_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4179,10 +4179,10 @@
               <label class="select-label" for="liver_patch_12_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_12_hes2_quality" name="liver_patch_12_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4205,10 +4205,10 @@
               <label class="select-label" for="liver_patch_13_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_13_hes1_quality" name="liver_patch_13_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4217,10 +4217,10 @@
               <label class="select-label" for="liver_patch_13_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_13_hes2_quality" name="liver_patch_13_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4243,10 +4243,10 @@
               <label class="select-label" for="liver_patch_14_hes1_quality">Quality</label>
               <select class="quality quality-hes1" id="liver_patch_14_hes1_quality" name="liver_patch_14_hes1_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
             <div class="cell">
@@ -4255,10 +4255,10 @@
               <label class="select-label" for="liver_patch_14_hes2_quality">Quality</label>
               <select class="quality quality-hes2" id="liver_patch_14_hes2_quality" name="liver_patch_14_hes2_quality">
                 <option value="">-- Select quality --</option>
-                <option value="Very good quality">Very good quality</option>
-                <option value="Good quality">Good quality</option>
+                <option value="Very high quality">Very high quality</option>
+                <option value="high quality">high quality</option>
                 <option value="Medium quality">Medium quality</option>
-                <option value="Bad quality">Bad quality</option>
+                <option value="poor quality">poor quality</option>
               </select>
             </div>
           </div>
@@ -4345,7 +4345,7 @@
 
     const ROWS = [{"row_id": "breast_0001", "organ": "Breast", "patch": 1, "field_hes1": "breast_patch_1_hes1_quality", "field_hes2": "breast_patch_1_hes2_quality"}, {"row_id": "breast_0002", "organ": "Breast", "patch": 2, "field_hes1": "breast_patch_2_hes1_quality", "field_hes2": "breast_patch_2_hes2_quality"}, {"row_id": "breast_0003", "organ": "Breast", "patch": 3, "field_hes1": "breast_patch_3_hes1_quality", "field_hes2": "breast_patch_3_hes2_quality"}, {"row_id": "breast_0004", "organ": "Breast", "patch": 4, "field_hes1": "breast_patch_4_hes1_quality", "field_hes2": "breast_patch_4_hes2_quality"}, {"row_id": "breast_0005", "organ": "Breast", "patch": 5, "field_hes1": "breast_patch_5_hes1_quality", "field_hes2": "breast_patch_5_hes2_quality"}, {"row_id": "breast_0006", "organ": "Breast", "patch": 6, "field_hes1": "breast_patch_6_hes1_quality", "field_hes2": "breast_patch_6_hes2_quality"}, {"row_id": "breast_0007", "organ": "Breast", "patch": 7, "field_hes1": "breast_patch_7_hes1_quality", "field_hes2": "breast_patch_7_hes2_quality"}, {"row_id": "breast_0008", "organ": "Breast", "patch": 8, "field_hes1": "breast_patch_8_hes1_quality", "field_hes2": "breast_patch_8_hes2_quality"}, {"row_id": "breast_0009", "organ": "Breast", "patch": 9, "field_hes1": "breast_patch_9_hes1_quality", "field_hes2": "breast_patch_9_hes2_quality"}, {"row_id": "breast_0010", "organ": "Breast", "patch": 10, "field_hes1": "breast_patch_10_hes1_quality", "field_hes2": "breast_patch_10_hes2_quality"}, {"row_id": "breast_0011", "organ": "Breast", "patch": 11, "field_hes1": "breast_patch_11_hes1_quality", "field_hes2": "breast_patch_11_hes2_quality"}, {"row_id": "breast_0012", "organ": "Breast", "patch": 12, "field_hes1": "breast_patch_12_hes1_quality", "field_hes2": "breast_patch_12_hes2_quality"}, {"row_id": "breast_0013", "organ": "Breast", "patch": 13, "field_hes1": "breast_patch_13_hes1_quality", "field_hes2": "breast_patch_13_hes2_quality"}, {"row_id": "breast_0014", "organ": "Breast", "patch": 14, "field_hes1": "breast_patch_14_hes1_quality", "field_hes2": "breast_patch_14_hes2_quality"}, {"row_id": "colon_0001", "organ": "Colon", "patch": 1, "field_hes1": "colon_patch_1_hes1_quality", "field_hes2": "colon_patch_1_hes2_quality"}, {"row_id": "colon_0002", "organ": "Colon", "patch": 2, "field_hes1": "colon_patch_2_hes1_quality", "field_hes2": "colon_patch_2_hes2_quality"}, {"row_id": "colon_0003", "organ": "Colon", "patch": 3, "field_hes1": "colon_patch_3_hes1_quality", "field_hes2": "colon_patch_3_hes2_quality"}, {"row_id": "colon_0004", "organ": "Colon", "patch": 4, "field_hes1": "colon_patch_4_hes1_quality", "field_hes2": "colon_patch_4_hes2_quality"}, {"row_id": "colon_0005", "organ": "Colon", "patch": 5, "field_hes1": "colon_patch_5_hes1_quality", "field_hes2": "colon_patch_5_hes2_quality"}, {"row_id": "colon_0006", "organ": "Colon", "patch": 6, "field_hes1": "colon_patch_6_hes1_quality", "field_hes2": "colon_patch_6_hes2_quality"}, {"row_id": "colon_0007", "organ": "Colon", "patch": 7, "field_hes1": "colon_patch_7_hes1_quality", "field_hes2": "colon_patch_7_hes2_quality"}, {"row_id": "colon_0008", "organ": "Colon", "patch": 8, "field_hes1": "colon_patch_8_hes1_quality", "field_hes2": "colon_patch_8_hes2_quality"}, {"row_id": "colon_0009", "organ": "Colon", "patch": 9, "field_hes1": "colon_patch_9_hes1_quality", "field_hes2": "colon_patch_9_hes2_quality"}, {"row_id": "colon_0010", "organ": "Colon", "patch": 10, "field_hes1": "colon_patch_10_hes1_quality", "field_hes2": "colon_patch_10_hes2_quality"}, {"row_id": "colon_0011", "organ": "Colon", "patch": 11, "field_hes1": "colon_patch_11_hes1_quality", "field_hes2": "colon_patch_11_hes2_quality"}, {"row_id": "colon_0012", "organ": "Colon", "patch": 12, "field_hes1": "colon_patch_12_hes1_quality", "field_hes2": "colon_patch_12_hes2_quality"}, {"row_id": "colon_0013", "organ": "Colon", "patch": 13, "field_hes1": "colon_patch_13_hes1_quality", "field_hes2": "colon_patch_13_hes2_quality"}, {"row_id": "colon_0014", "organ": "Colon", "patch": 14, "field_hes1": "colon_patch_14_hes1_quality", "field_hes2": "colon_patch_14_hes2_quality"}, {"row_id": "lung_0001", "organ": "Lung", "patch": 1, "field_hes1": "lung_patch_1_hes1_quality", "field_hes2": "lung_patch_1_hes2_quality"}, {"row_id": "lung_0002", "organ": "Lung", "patch": 2, "field_hes1": "lung_patch_2_hes1_quality", "field_hes2": "lung_patch_2_hes2_quality"}, {"row_id": "lung_0003", "organ": "Lung", "patch": 3, "field_hes1": "lung_patch_3_hes1_quality", "field_hes2": "lung_patch_3_hes2_quality"}, {"row_id": "lung_0004", "organ": "Lung", "patch": 4, "field_hes1": "lung_patch_4_hes1_quality", "field_hes2": "lung_patch_4_hes2_quality"}, {"row_id": "lung_0005", "organ": "Lung", "patch": 5, "field_hes1": "lung_patch_5_hes1_quality", "field_hes2": "lung_patch_5_hes2_quality"}, {"row_id": "lung_0006", "organ": "Lung", "patch": 6, "field_hes1": "lung_patch_6_hes1_quality", "field_hes2": "lung_patch_6_hes2_quality"}, {"row_id": "lung_0007", "organ": "Lung", "patch": 7, "field_hes1": "lung_patch_7_hes1_quality", "field_hes2": "lung_patch_7_hes2_quality"}, {"row_id": "lung_0008", "organ": "Lung", "patch": 8, "field_hes1": "lung_patch_8_hes1_quality", "field_hes2": "lung_patch_8_hes2_quality"}, {"row_id": "lung_0009", "organ": "Lung", "patch": 9, "field_hes1": "lung_patch_9_hes1_quality", "field_hes2": "lung_patch_9_hes2_quality"}, {"row_id": "lung_0010", "organ": "Lung", "patch": 10, "field_hes1": "lung_patch_10_hes1_quality", "field_hes2": "lung_patch_10_hes2_quality"}, {"row_id": "lung_0011", "organ": "Lung", "patch": 11, "field_hes1": "lung_patch_11_hes1_quality", "field_hes2": "lung_patch_11_hes2_quality"}, {"row_id": "lung_0012", "organ": "Lung", "patch": 12, "field_hes1": "lung_patch_12_hes1_quality", "field_hes2": "lung_patch_12_hes2_quality"}, {"row_id": "lung_0013", "organ": "Lung", "patch": 13, "field_hes1": "lung_patch_13_hes1_quality", "field_hes2": "lung_patch_13_hes2_quality"}, {"row_id": "lung_0014", "organ": "Lung", "patch": 14, "field_hes1": "lung_patch_14_hes1_quality", "field_hes2": "lung_patch_14_hes2_quality"}, {"row_id": "liver_0001", "organ": "Liver", "patch": 1, "field_hes1": "liver_patch_1_hes1_quality", "field_hes2": "liver_patch_1_hes2_quality"}, {"row_id": "liver_0002", "organ": "Liver", "patch": 2, "field_hes1": "liver_patch_2_hes1_quality", "field_hes2": "liver_patch_2_hes2_quality"}, {"row_id": "liver_0003", "organ": "Liver", "patch": 3, "field_hes1": "liver_patch_3_hes1_quality", "field_hes2": "liver_patch_3_hes2_quality"}, {"row_id": "liver_0004", "organ": "Liver", "patch": 4, "field_hes1": "liver_patch_4_hes1_quality", "field_hes2": "liver_patch_4_hes2_quality"}, {"row_id": "liver_0005", "organ": "Liver", "patch": 5, "field_hes1": "liver_patch_5_hes1_quality", "field_hes2": "liver_patch_5_hes2_quality"}, {"row_id": "liver_0006", "organ": "Liver", "patch": 6, "field_hes1": "liver_patch_6_hes1_quality", "field_hes2": "liver_patch_6_hes2_quality"}, {"row_id": "liver_0007", "organ": "Liver", "patch": 7, "field_hes1": "liver_patch_7_hes1_quality", "field_hes2": "liver_patch_7_hes2_quality"}, {"row_id": "liver_0008", "organ": "Liver", "patch": 8, "field_hes1": "liver_patch_8_hes1_quality", "field_hes2": "liver_patch_8_hes2_quality"}, {"row_id": "liver_0009", "organ": "Liver", "patch": 9, "field_hes1": "liver_patch_9_hes1_quality", "field_hes2": "liver_patch_9_hes2_quality"}, {"row_id": "liver_0010", "organ": "Liver", "patch": 10, "field_hes1": "liver_patch_10_hes1_quality", "field_hes2": "liver_patch_10_hes2_quality"}, {"row_id": "liver_0011", "organ": "Liver", "patch": 11, "field_hes1": "liver_patch_11_hes1_quality", "field_hes2": "liver_patch_11_hes2_quality"}, {"row_id": "liver_0012", "organ": "Liver", "patch": 12, "field_hes1": "liver_patch_12_hes1_quality", "field_hes2": "liver_patch_12_hes2_quality"}, {"row_id": "liver_0013", "organ": "Liver", "patch": 13, "field_hes1": "liver_patch_13_hes1_quality", "field_hes2": "liver_patch_13_hes2_quality"}, {"row_id": "liver_0014", "organ": "Liver", "patch": 14, "field_hes1": "liver_patch_14_hes1_quality", "field_hes2": "liver_patch_14_hes2_quality"}];
 
-    const QUALITY_LEVELS = ["Very good quality", "Good quality", "Medium quality", "Bad quality"];
+    const QUALITY_LEVELS = ["Very high quality", "high quality", "Medium quality", "poor quality"];
 
     const STORAGE_KEY = "wssb_subjective_eval_v1";
 
@@ -4381,16 +4381,16 @@
 
       if (!selectEl) return;
 
-      selectEl.classList.remove("value-good", "value-very-good", "value-intermediate", "value-bad");
+      selectEl.classList.remove("value-high", "value-very-high", "value-intermediate", "value-poor");
 
       const v = normalize(selectEl.value);
 
-      if (v === "Good quality") selectEl.classList.add("value-good");
-      else if (v === "Very good quality") selectEl.classList.add("value-very-good");
+      if (v === "high quality") selectEl.classList.add("value-high");
+      else if (v === "Very high quality") selectEl.classList.add("value-very-high");
 
       else if (v === "Medium quality") selectEl.classList.add("value-intermediate");
 
-      else if (v === "Bad quality") selectEl.classList.add("value-bad");
+      else if (v === "poor quality") selectEl.classList.add("value-poor");
 
     }
 
@@ -4406,12 +4406,12 @@
 
           opt.style.fontWeight = "700";
 
-          if (v === "Good quality") opt.style.color = "#1b6ca8";
-          else if (v === "Very good quality") opt.style.color = "#1e8e3e";
+          if (v === "high quality") opt.style.color = "#1b6ca8";
+          else if (v === "Very high quality") opt.style.color = "#1e8e3e";
 
           else if (v === "Medium quality") opt.style.color = "#d9822b";
 
-          else if (v === "Bad quality") opt.style.color = "#c9332f";
+          else if (v === "poor quality") opt.style.color = "#c9332f";
 
         }
 
@@ -4488,10 +4488,10 @@
     function updateSummary() {
 
       const emptyCounts = () => ({
-        "Good quality": 0,
-        "Very good quality": 0,
+        "high quality": 0,
+        "Very high quality": 0,
         "Medium quality": 0,
-        "Bad quality": 0,
+        "poor quality": 0,
       });
       const byOrganM1 = {};
 
@@ -4549,21 +4549,21 @@
 
         const key = keys[organ];
 
-        document.getElementById(`m1-${key}-good`).textContent = String(byOrganM1[organ]["Good quality"]);
-        document.getElementById(`m1-${key}-very-good`).textContent = String(byOrganM1[organ]["Very good quality"]);
+        document.getElementById(`m1-${key}-high`).textContent = String(byOrganM1[organ]["high quality"]);
+        document.getElementById(`m1-${key}-very-high`).textContent = String(byOrganM1[organ]["Very high quality"]);
         document.getElementById(`m1-${key}-intermediate`).textContent = String(byOrganM1[organ]["Medium quality"]);
 
-        document.getElementById(`m1-${key}-bad`).textContent = String(byOrganM1[organ]["Bad quality"]);
+        document.getElementById(`m1-${key}-poor`).textContent = String(byOrganM1[organ]["poor quality"]);
 
         document.getElementById(`m1-${key}-progress`).textContent = `${progressM1[organ]}/${organTotals[organ] || 0}`;
 
 
 
-        document.getElementById(`m2-${key}-good`).textContent = String(byOrganM2[organ]["Good quality"]);
-        document.getElementById(`m2-${key}-very-good`).textContent = String(byOrganM2[organ]["Very good quality"]);
+        document.getElementById(`m2-${key}-high`).textContent = String(byOrganM2[organ]["high quality"]);
+        document.getElementById(`m2-${key}-very-high`).textContent = String(byOrganM2[organ]["Very high quality"]);
         document.getElementById(`m2-${key}-intermediate`).textContent = String(byOrganM2[organ]["Medium quality"]);
 
-        document.getElementById(`m2-${key}-bad`).textContent = String(byOrganM2[organ]["Bad quality"]);
+        document.getElementById(`m2-${key}-poor`).textContent = String(byOrganM2[organ]["poor quality"]);
 
         document.getElementById(`m2-${key}-progress`).textContent = `${progressM2[organ]}/${organTotals[organ] || 0}`;
 
